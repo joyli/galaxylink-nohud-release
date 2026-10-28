@@ -2,6 +2,18 @@
 
 本文件记录「星越L银河助手 · 无 HUD 版」的公开版本变更。
 
+## v0.0.0.78 (beta)
+
+- 车辆信息页灯光不再用 `--` 掩盖取值，改为**直接显示车机上报的状态值**：`ON(1)` / `OFF(0)` / `DEFAULT(2)` / `ERROR(253)` / `NONE(254)` / `UNKNOWN(255)` / `NO_SIGNAL(-1)`，其余值原样呈现为「值 N」。
+- 车窗按 **100% 行程**显示：依据车机 `WinAndRoofAndCurtPosnTyp` 档位换算（`全关=0%`、`全开=100%`，中间每档 4%），并附原始状态值便于对照。
+- 车辆信息页所有信号获取**补齐日志**：座舱轮询逐项输出车窗/天窗/空调/转向灯/靠背角度的原始值与解析结果，尾门状态单独打点，便于按项目排查取不到值的问题。
+
+### 安装包校验
+
+| 文件 | SHA-256 |
+| --- | --- |
+| `galaxylink-toolkit-nohud-v0.0.0.78-beta-debug.apk` | `f16375a981c4f8a611aa8df6d4886e54a6651b38777521ff1dbb2ec6df7428a5` |
+
 ## v0.0.0.77 (beta)
 
 - **在线更新检测改用 HTTPS**：`https://www.izhuoe.com/galaxylink-release-parser.php`（JSON 输出用 `?format=json`）。
