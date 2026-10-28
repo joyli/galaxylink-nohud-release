@@ -8,7 +8,43 @@
 > - **本地仓库 `releases/` 目录：只保留最新版本安装包** —— 旧版安装包不在仓库内累积，避免体积膨胀。
 > - 本文件的变更记录永久保留。
 >
-> 当前最新：**v0.0.0.90** → `releases/v0.0.0.90/galaxylink-toolkit-nohud-v0.0.0.90-beta-debug.apk`
+> 当前最新：**v0.0.0.99** → `releases/v0.0.0.99/galaxylink-toolkit-nohud-v0.0.0.99-beta-debug.apk`
+
+## v0.0.0.99 (beta)
+
+车辆信息页基于实车日志的全面修正：多个信号此前取错了信号源或误解了枚举语义，导致状态显示错误或整项无值。
+
+### 修复
+
+- **倒车预警 / 前碰撞预警状态显示错误**：此前用 `getCllsnFwdWarn`（前碰撞**预警等级**枚举，0=NoWarning）与 `getRctaIndcnLe`（倒车雷达**指示等级**，0=NoWarning）按开关解读，功能实际开启时显示「关闭」。
+  - 前碰撞预警改用**功能状态** `getCllsnMtgtnFctSts`（ON=2 / OFF=1），并新增「碰撞预警灵敏度」行 `getCllsnAidSnvtySeldSts`（未激活/关闭/开启/中/高）。
+  - 倒车侧预警改为等级语义（无预警/一级/二级），左右雷达合并取高等级。
+- **灯光状态闪烁与不可用**：BCM property 侧外灯属性实测除远光灯外全部 `NO_SIGNAL(-1)`，且多 areaId 事件反复推不同值导致抖动。
+  - 改接 cabin 侧 `getExtrLtgSts*` 系列（近光/远光/自动远光/自适应大灯/全天气灯/前后位置灯）为主来源，BCM 侧兜底。
+  - 新增 `LightStabilizer` 去抖：非默认值需连续 3 次才发布，关灯（OFF）立即生效，避免状态来回闪烁。
+- **机油显示为「200」**：车机 `getEngOilLvl` 上报 0.1% 量纲之外的整数值，现按百分比还原显示（实测 200 → 100%），并新增「机油状态」行（正常/偏低/偏高/需保养）。
+- **油量显示为「213 L」**：车机 `getFuLvlIndcdFuLvlValFromFuTbl` 与 `getPercOfFuLvlIndcn` 基准不一致，直接当升数显示明显失真。现以百分比为准、按官方 55L 油箱容量反推升数。
+- **车辆总里程无显示**：`getDstTrvld1` 在本车返回无效值，改走 `car_publicattribute` 的 `getPA_Total_Traveled_Distance`（实测 50945 km），并移除「保养剩余时长」改为「车辆总里程」。
+- **挡位显示错误（D 档显示 R 档）**：`getPtGearAct` 的真实编码是 `PtGearAct1`（Neut=0、Gear1~12=1~12、Drv=13、Ukwn=14、Rvs=15），此前按 `P=0 R=1 N=2 D=3` 硬编码映射，把 1 档误判为 R 挡。现按真实枚举解码，并优先使用 cabin 侧 `getGearLvrIndcn`（含 P=0/R=1/N=2/D=3 语义）。
+- **盖板类信号解码**：油箱盖 / 引擎盖 / 充电口盖改用 ECarX 通用开关编码 `OffOnErrInvalid`（0=关闭/1=打开/2=异常/3=无效），不再把状态码当开关值显示。
+
+### 新增
+
+- **驾驶模式检测**：改走 `car_publicattribute` → `ECarXCarSetManager` → `ECarXCarDrivemodeManager`，读取 Eco / Comfort / Dynamic / Power / Hybrid / Snow / Sand / Mud / Rock / Individual / Adaptive / Pure 各模式的独立选中标志（值 1=选中），页面显示实际生效的模式名。
+- **挡位检测**：新增「驾驶状态」卡片，实时显示 P / R / N / D / 手动模式。
+- **手刹状态检测**：电子手刹 EPB 支持 `getEpbStsEpbSts`（已拉起/已释放/动态制动中），并以 `getPA_EPBAutoApply` 兜底。
+- **AutoHold 状态检测**：改走 `getPA_AutoHoldStatus`，car_signal 侧 `getAutHldSoftSwtEnaSts` 兜底。
+
+### 顺带改进
+
+- PA 通道（`car_publicattribute`）承载总里程 / AutoHold / EPB / 驾驶模式等必需项，修复了「尾门取数失败即连带放弃 PA 连接」导致的连带失联问题，改为持续重试直至就绪。
+- 驾驶模式管理器获取失败日志节流至 60 秒一次，避免高频刷屏。
+
+### 安装包校验
+
+| 文件 | SHA-256 |
+| --- | --- |
+| `galaxylink-toolkit-nohud-v0.0.0.99-beta-debug.apk` | `638180f02525f49d53db3475b458f43a3c56a673d99814cfcd4bc1c89611fe57` |
 
 ## v0.0.0.90 (beta)
 
