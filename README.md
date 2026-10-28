@@ -27,23 +27,19 @@
 
 前往 [Releases 页面](https://github.com/joyli/galaxylink-nohud-release/releases) 下载最新版本。
 
+> **本仓库仅保留最新版本安装包**，历史版本安装包不再保留（变更记录见 [CHANGELOG.md](CHANGELOG.md)）。
+
 | 版本 | 渠道 | 最低系统 | 说明 |
 | --- | --- | --- | --- |
-| v0.0.0.87 | beta(诊断) | Android 9 (API 28) | 电池 SOC 实时诊断日志版（驱动控制器 5s 轮询 + 状态页值变化记录），用于排查动力电池容量不刷新问题 |
-| v0.0.0.85 | beta | Android 9 (API 28) | 顶栏『检查更新』改为『关于软件』，点击弹出 WebView 版权说明页（支持上下滑动） |
-| v0.0.0.84 | beta | Android 9 (API 28) | 车辆信息页按 CarSignal 全量扩充（机油/12V蓄电池/油量/续航/里程/保养/环境/车身/扩展灯光/制动辅助/姿态），胎压加 kPa/℃、天窗与遮阳帘按百分比 |
-| v0.0.0.82 | beta | Android 9 (API 28) | 保养信息文案统一为「重置保养信息」 |
-| v0.0.0.81 | beta | Android 9 (API 28) | 工程合并单模块、连接层统一、图标 WebP、开启资源缩减 |
-| v0.0.0.78 | beta | Android 9 (API 28) | 车辆信息灯光显示状态值、车窗按 100% 行程、补齐信号日志 |
-| v0.0.0.77 | beta | Android 9 (API 28) | 在线更新检测改用 HTTPS |
-| v0.0.0.76 | beta | Android 9 (API 28) | 在线更新检测改用官方解析接口 |
-| v0.0.0.75 | beta | Android 9 (API 28) | 修复 Android 9 启动后界面不显示问题 |
+| **v0.0.0.88（最新）** | beta | Android 9 (API 28) | 修复状态页动力电池容量不刷新（SOC 0.1% 量纲解码修正 + getter 优先级调整）；含顶栏『关于软件』版权弹窗、车辆信息页 CarSignal 全量扩充、胎压 kPa/℃、天窗与遮阳帘百分比 |
 
 安装包为 **Debug 签名**，可直接安装：
 
 ```bash
-adb install -r galaxylink-toolkit-nohud-v0.0.0.75-beta-debug.apk
+adb install -r galaxylink-toolkit-nohud-v0.0.0.88-beta-debug.apk
 ```
+
+SHA-256：`44ec6f79a9cb47aa67c66029f3af7b8522cbfd815282d209320bae3d78e8247a`
 
 > 需要车机已授予相应权限（悬浮球、后台运行、无障碍等）。首次安装后可在「通用 → 界面显示」中开启相关页面入口。
 

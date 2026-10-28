@@ -2,6 +2,23 @@
 
 本文件记录「星越L银河助手 · 无 HUD 版」的公开版本变更。
 
+> **产物策略**：本仓库仅保留**最新版本**安装包，历史版本安装包不再保留（记录仍在本文件中备查）。
+> 当前最新：**v0.0.0.88** → `releases/v0.0.0.88/galaxylink-toolkit-nohud-v0.0.0.88-beta-debug.apk`
+
+## v0.0.0.88 (beta)
+
+- **修复状态页「动力电池容量」无法实时更新（重要）**：根因是 SOC 解码把有效值当无效值丢弃——车机 `getDispHvBattLvlOfChrg` 返回的是 **0.1% 量纲**原始值（实测 358~466），而解码函数把范围硬卡在 `0~100`，导致全部读数被判无效、`batteryPercent` 全程为 `null`，页面显示「--」且看似不刷新。
+  - 解码改为带量纲还原：`raw > 100` 按 `raw / 10` 还原百分比（`358 → 35.8%`），`0~100` 视为直读，无效值（255/254/负数）仍归 `null`。
+  - 电池 getter 优先级调整：优先 PA 显示电量 `getPA_VehCharg_DispHvBattLvlOfChrg`，其次直读 `getDispHvBattLvlOfChrg`，最后 `getPA_VehCharg_DisChargSOC`。
+  - 实测验证：状态页电量由 `35.8%` 连续刷新至 `58.8%`，`GalaxyLinkStatus` 记录 `runtime=… snapshot=… resolved=…` 持续变化，实时刷新已恢复正常。
+- 保留电池 SOC 诊断日志（驱动控制器每 5 秒 `battery diag`、状态页值变化时记录），便于后续排查。
+
+### 安装包校验
+
+| 文件 | SHA-256 |
+| --- | --- |
+| `galaxylink-toolkit-nohud-v0.0.0.88-beta-debug.apk` | `44ec6f79a9cb47aa67c66029f3af7b8522cbfd815282d209320bae3d78e8247a` |
+
 ## v0.0.0.87 (beta)
 
 - **电池 SOC 实时诊断日志**：为定位「状态页动力电池容量无法实时更新」问题，新增诊断日志——
