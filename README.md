@@ -25,9 +25,13 @@
 
 ## 下载
 
-前往 [Releases 页面](https://github.com/joyli/galaxylink-nohud-release/releases) 下载最新版本。
+前往 [Releases 页面](https://github.com/joyli/galaxylink-nohud-release/releases) 下载，历史版本同样保留可下载。
 
-> **本仓库仅保留最新版本安装包**，历史版本安装包不再保留（变更记录见 [CHANGELOG.md](CHANGELOG.md)）。
+> **发布策略（v0.0.0.88 起生效）**
+>
+> - **双端 Releases 页面：每个版本永久保留，不删除**（GitHub / Gitee 均已发布的版本按版本迭代累加）。
+> - **本地仓库 `releases/` 目录：只保留最新版本安装包**，旧版安装包不在仓库内累积（避免仓库体积膨胀）。
+> - 变更文字记录见 [CHANGELOG.md](CHANGELOG.md)，亦永久保留。
 
 | 版本 | 渠道 | 最低系统 | 说明 |
 | --- | --- | --- | --- |
