@@ -2,6 +2,18 @@
 
 本文件记录「星越L银河助手 · 无 HUD 版」的公开版本变更。
 
+## v0.0.0.81 (beta)
+
+- **工程结构精简**：将 `core-common` / `core-data` / `core-ui` / `xposed-api-stubs` 四个子模块物理合并进单一 `app` 模块（保留原包名，`import` 零改动），顶层目录显著减少，更易维护。
+- **连接层统一**：新增公共 `GalaxyLinkHttpClient`，收敛更新检查与 APK 下载中原先重复的 `HttpURLConnection` 样板（超时 / 重定向 / 大小上限 / 流拷贝 / 日志），消除重复的「连接调用文件」。
+- **体积优化**：业务图标 PNG 转无损 WebP（364K→244K），开启 `shrinkResources` 并用 `keep.xml` 保护图标资源；APK 体积 14.34MB→14.21MB。
+
+### 安装包校验
+
+| 文件 | SHA-256 |
+| --- | --- |
+| `galaxylink-toolkit-nohud-v0.0.0.81-beta-debug.apk` | `f870345908cde488d4c35518b80d5a5b78e211e968694050416d432814c1889f` |
+
 ## v0.0.0.78 (beta)
 
 - 车辆信息页灯光不再用 `--` 掩盖取值，改为**直接显示车机上报的状态值**：`ON(1)` / `OFF(0)` / `DEFAULT(2)` / `ERROR(253)` / `NONE(254)` / `UNKNOWN(255)` / `NO_SIGNAL(-1)`，其余值原样呈现为「值 N」。
