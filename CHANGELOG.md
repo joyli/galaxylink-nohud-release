@@ -2,6 +2,20 @@
 
 本文件记录「星越L银河助手 · 无 HUD 版」的公开版本变更。
 
+## v0.0.0.76 (beta)
+
+- **在线更新检测地址改用官方解析接口**：`http://www.izhuoe.com/galaxylink-release-parser.php`（JSON 输出用 `?format=json`），一次请求即可获取 Gitee / GitHub 聚合后的最新版本。
+- 「通用 → 关于与更新」新增「官方解析」更新来源选项，「自动」策略调整为解析接口优先、Gitee / GitHub 依次兜底。
+- 修复更新渠道判定：发布仓库 tag 形如 `v0.0.0.75`（4 段、无 `-beta` 后缀），此前会被误判为正式版，导致检查更新始终显示「已是最新」；现按版本号段数推断渠道（4 段为测试版、3 段为正式版）。
+- 明文流量按域名精确放行：仅 `izhuoe.com` 允许 HTTP，其余域名仍强制 HTTPS。
+- 修复解析接口未返回安装包大小时下载进度停滞、大小校验失效的问题（改用响应头 `Content-Length` 兜底）。
+
+### 安装包校验
+
+| 文件 | SHA-256 |
+| --- | --- |
+| `galaxylink-toolkit-nohud-v0.0.0.76-beta-debug.apk` | `f77de792f9905917c7a0b68a894b6ec3055d1178ad43a173a547fcd1892c6a82` |
+
 ## v0.0.0.75 (beta)
 
 - 修复 Android 9（API 28）设备上启动后界面不显示的问题：
