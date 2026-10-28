@@ -8,7 +8,21 @@
 > - **本地仓库 `releases/` 目录：只保留最新版本安装包** —— 旧版安装包不在仓库内累积，避免体积膨胀。
 > - 本文件的变更记录永久保留。
 >
-> 当前最新：**v0.0.0.88** → `releases/v0.0.0.88/galaxylink-toolkit-nohud-v0.0.0.88-beta-debug.apk`
+> 当前最新：**v0.0.0.90** → `releases/v0.0.0.90/galaxylink-toolkit-nohud-v0.0.0.90-beta-debug.apk`
+
+## v0.0.0.90 (beta)
+
+- **车辆信息页：仅展示可获取值的项**：结合实车日志，移除了大量车机框架无法返回有效值的 CarSignal 项——原「无数据」占位不再渲染，页面只保留当前车辆真正能取到的信号，避免满屏占位、信息过载。
+  - `RawSignalRow`：值为 `null` 时直接不渲染该行。
+  - 各取值 helper（开关 / 数值 / 温度 / 油量 / 电池电压 / 外部灯光 / 天窗百分比等）原为「无数据」改为返回 `null`，由行守卫统一跳过。
+  - 空调卡片（ClimateCard）、尾门卡片（TailgateCard）在全部数据为空时整卡隐藏。
+- 集成 v0.0.0.88 的修复：状态页动力电池容量实时刷新（SOC 0.1% 量纲解码修正 + getter 优先级调整），以及顶栏『关于软件』版权弹窗。
+
+### 安装包校验
+
+| 文件 | SHA-256 |
+| --- | --- |
+| `galaxylink-toolkit-nohud-v0.0.0.90-beta-debug.apk` | `ab84a552a8b6ae0af6b519e745ead6737f003953b33400b5a94778bef32fde8e` |
 
 ## v0.0.0.88 (beta)
 

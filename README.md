@@ -35,15 +35,16 @@
 
 | 版本 | 渠道 | 最低系统 | 说明 |
 | --- | --- | --- | --- |
-| **v0.0.0.88（最新）** | beta | Android 9 (API 28) | 修复状态页动力电池容量不刷新（SOC 0.1% 量纲解码修正 + getter 优先级调整）；含顶栏『关于软件』版权弹窗、车辆信息页 CarSignal 全量扩充、胎压 kPa/℃、天窗与遮阳帘百分比 |
+| **v0.0.0.90（最新）** | beta | Android 9 (API 28) | 车辆信息页仅展示可获取值的项，无数据项不再渲染（去除「无数据」占位）；含 v0.0.0.88 的 SOC 实时刷新修复、顶栏『关于软件』版权弹窗 |
+| v0.0.0.88 | beta | Android 9 (API 28) | 修复状态页动力电池容量不刷新（SOC 0.1% 量纲解码修正 + getter 优先级调整）；含顶栏『关于软件』版权弹窗、车辆信息页 CarSignal 全量扩充、胎压 kPa/℃、天窗与遮阳帘百分比 |
 
 安装包为 **Debug 签名**，可直接安装：
 
 ```bash
-adb install -r galaxylink-toolkit-nohud-v0.0.0.88-beta-debug.apk
+adb install -r galaxylink-toolkit-nohud-v0.0.0.90-beta-debug.apk
 ```
 
-SHA-256：`44ec6f79a9cb47aa67c66029f3af7b8522cbfd815282d209320bae3d78e8247a`
+SHA-256：`ab84a552a8b6ae0af6b519e745ead6737f003953b33400b5a94778bef32fde8e`
 
 > 需要车机已授予相应权限（悬浮球、后台运行、无障碍等）。首次安装后可在「通用 → 界面显示」中开启相关页面入口。
 
