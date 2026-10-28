@@ -2,6 +2,18 @@
 
 本文件记录「星越L银河助手 · 无 HUD 版」的公开版本变更。
 
+## v0.0.0.77 (beta)
+
+- **在线更新检测改用 HTTPS**：`https://www.izhuoe.com/galaxylink-release-parser.php`（JSON 输出用 `?format=json`）。
+- 站点证书链补全：站点只下发叶子证书，中间证书 `YR1` 与根证书 `ISRG Root YR` 均为 2025 年后新增，Android 9（API 28）等旧车机系统 CA 库中没有；现将两者内置为信任锚，使 HTTPS 校验在旧系统上也能通过（根证书交叉锚定到系统内置的 ISRG Root X1，未降低信任强度）。
+- 保留 HTTP 作为兜底通道：设备 CA 库确实无法补齐时自动回退，避免在线更新功能整体不可用。
+
+### 安装包校验
+
+| 文件 | SHA-256 |
+| --- | --- |
+| `galaxylink-toolkit-nohud-v0.0.0.77-beta-debug.apk` | `92ba4e087559cc26a92522c5165984a6011edb8b4a8a99b6b5e44726753eb6f6` |
+
 ## v0.0.0.76 (beta)
 
 - **在线更新检测地址改用官方解析接口**：`http://www.izhuoe.com/galaxylink-release-parser.php`（JSON 输出用 `?format=json`），一次请求即可获取 Gitee / GitHub 聚合后的最新版本。
