@@ -2,6 +2,13 @@
 
 本文件记录「星越L银河助手 · 无 HUD 版」的公开版本变更。
 
+## v0.0.0.87 (beta)
+
+- **电池 SOC 实时诊断日志**：为定位「状态页动力电池容量无法实时更新」问题，新增诊断日志——
+  - 驱动控制器 `EcarxDriveSignalController`：连接成功时打印实际选中的电池 getter 名与是否 PA 包装；每 5 秒打印 `battery diag: getter=… wrapsPa=… raw=… decoded=… published=…`。
+  - 状态页 `GalaxyLinkStatus`：动力电池容量仅在解析值变化时打印 `runtime=… snapshot=… resolved=…`。
+- 功能与 v0.0.0.85 一致，本版仅用于采日志定位，建议用于排查后再更新正式版。
+
 ## v0.0.0.85 (beta)
 
 - **顶栏『检查更新』改为『关于软件』**：点击后弹出全屏弹窗，内嵌 WebView 加载版权说明页面 `https://www.izhuoe.com/copyright.php`，支持上下滑动浏览，含加载中与加载失败提示；相对资源（如二维码图片）以 `https://www.izhuoe.com/` 为 base 正确解析。
