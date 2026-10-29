@@ -8,7 +8,20 @@
 > - **本地仓库 `releases/` 目录：只保留最新版本安装包** —— 旧版安装包不在仓库内累积，避免体积膨胀。
 > - 本文件的变更记录永久保留。
 >
-> 当前最新：**v0.0.1.14** → `releases/v0.0.1.14/galaxylink-toolkit-nohud-v0.0.1.14-beta-debug.apk`
+> 当前最新：**v0.0.1.15** → `releases/v0.0.1.15/galaxylink-toolkit-nohud-v0.0.1.15-beta-debug.apk`
+
+## v0.0.1.15 (beta)
+
+- **日志文件达10MB 后滚出为新分段文件（不再原地截断）**：原实现单文件超过 10MB 时直接截断、只保留尾部 4MB，导致**日志开头内容永久丢失**。现改为分段滚动：主文件 `galaxylink.log.<yyyyMMdd>.txt` 达到 10MB 后自动新建 `galaxylink.log.<yyyyMMdd>.<序号>.txt`（序号自 1 递增，同一天最多 64 段；段号用尽时清空最后一段复用），单文件体积恒定 ≤ 10MB 且历史内容完整保留。滚动时写入 `Log file rolled over` 便于追溯。
+- **调试页支持查看分段文件**：`parseLogFileName` 改为从右侧定位 8 位日期段并允许尾随可选序号段，兼容新旧两种命名；分段文件在列表中显示为 `log #1`、`log #2`，便于区分同一天的多段日志。
+- **日志在页面隐藏时照常记录**：`EcarxAutoHoldController` / `EcarxTirePressureController` / `EcarxVehicleInfoController` 此前仅在打开「车辆信息」页时创建，页面隐藏时其服务连接、监听注册、信号解码等诊断日志完全不落盘。现与座舱/车门/行驶信号控制器一并改为 `GalaxyLinkApplication` 全局常驻（均为线程安全单例，与页面共用实例，不重复创建）。
+- **保留天数正式包同样跟随用户设置**：此前 release 包强制固定 3 天（`LogRetentionDaysReleaseFixed`）、忽略用户选择。现统一改为跟随「通用 → 日志与诊断 → 日志保留天数」的 1/3/5 天设置，切换后立即生效，超过保留天数的日志文件（含各分段）自动清理。
+
+### 安装包校验
+
+| 文件 | SHA-256 |
+| --- | --- |
+| `galaxylink-toolkit-nohud-v0.0.1.15-beta-debug.apk` | `94e49b2a68d67e00f1cd5e441540a961e55ca5c2fe15a7c5b56bbaa4e2482e8f` |
 
 ## v0.0.1.14 (beta)
 
