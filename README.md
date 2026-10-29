@@ -35,7 +35,8 @@
 
 | 版本 | 渠道 | 最低系统 | 说明 |
 | --- | --- | --- | --- |
-| **v0.0.0.102（最新）** | beta | Android 9 (API 28) | 在线更新地址改为 `?api=1` 并适配接口扁平响应结构（顶层 tag + apks），保留旧结构兼容；补充真实接口样本单测 |
+| **v0.0.1.3（最新）** | beta | Android 9 (API 28) | beta 版本号改为「小时点 + 组内序号」分组（第四段满 100 进位第三段），序号 102 → 0.0.1.2、本版 → 0.0.1.3，版本号连续不跳号 |
+| v0.0.0.102 | beta | Android 9 (API 28) | 在线更新地址改为 `?api=1` 并适配接口扁平响应结构（顶层 tag + apks），保留旧结构兼容；补充真实接口样本单测 |
 | v0.0.0.101 | beta | Android 9 (API 28) | 移除启动页二维码资源；启用体积压缩（R8 full mode + so 压缩 + 资源裁剪 + 移除 ui-tooling），APK 15.0 MB → 13.8 MB |
 | v0.0.0.99 | beta | Android 9 (API 28) | 车辆信息页全面修正：前碰撞/倒车预警改用功能状态、灯光合并并去抖、机油与油量口径纠正、车辆总里程改走 PA 通道、挡位映射 bug 修复；新增驾驶模式/挡位/手刹/AutoHold 检测 |
 | v0.0.0.90 | beta | Android 9 (API 28) | 车辆信息页仅展示可获取值的项，无数据项不再渲染（去除「无数据」占位） |
@@ -44,10 +45,10 @@
 安装包为 **Debug 签名**，可直接安装：
 
 ```bash
-adb install -r galaxylink-toolkit-nohud-v0.0.0.102-beta-debug.apk
+adb install -r galaxylink-toolkit-nohud-v0.0.1.3-beta-debug.apk
 ```
 
-SHA-256：`a1aa0ecc23545d9e7fe9261b5d4d50c8de0d1120fc2aa0daea08beb5791e96f3`
+SHA-256：`e8d4ba6ba0c9cf6fc8acb7dbb504ab37219ffee77ff6f08042b55c50794620cc`
 
 > 需要车机已授予相应权限（悬浮球、后台运行、无障碍等）。首次安装后可在「通用 → 界面显示」中开启相关页面入口。
 
