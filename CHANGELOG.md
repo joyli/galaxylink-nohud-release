@@ -8,7 +8,21 @@
 > - **本地仓库 `releases/` 目录：只保留最新版本安装包** —— 旧版安装包不在仓库内累积，避免体积膨胀。
 > - 本文件的变更记录永久保留。
 >
-> 当前最新：**v0.0.1.3** → `releases/v0.0.1.3/galaxylink-toolkit-nohud-v0.0.1.3-beta-debug.apk`
+> 当前最新：**v0.0.1.4** → `releases/v0.0.1.4/galaxylink-toolkit-nohud-v0.0.1.4-beta-debug.apk`
+
+## v0.0.1.4 (beta)
+
+- **新增前后超声波雷达（泊车辅助 PAS）探测日志**：`EcarxCabinSignalController` 新增 `pollRadar()`，每 1.5s 轮询前后泊车雷达信号，状态变化或每 15s 心跳时打点一行（Tag=`GalaxyLinkCabinSignal`）。
+  - **PDC 系统诊断**（`CarSignalManager`）：PDC 静音键、超声波声道、输出时长、挂车障碍探测、代客泊车余量、PDC 车型模式。
+  - **前后超声波雷达逐传感器**（`ECarXCarPassapManager`，路径 `car_publicattribute → ECarXCarSetManager → getECarXCarPassapManager`）：前/后 × 内左/内右/外左/外右 共 8 路 + 前/后音频告警 + PDC 控制状态/开关 + 传感器故障告警。
+- **修复前碰撞预警（FCW）灵敏度取不到的问题**：原硬编码的 `getCllsnAidSnvtySeldSts` 在该车型 JAR 上不存在（日志持续报 `NoSuchMethodException`），改为有效的 `getCllsnFwdWarn`（前碰撞预警等级 0/1/2/3），日志字段 `fcwWarn=` 不再恒为 `null`。
+- 经核查非代码缺陷、未做改动的项：驾驶模式管理器 `getECarXCarSetManager`（旧异常来自旧包）、AAOS `CarPropertyManager` 未连接（Ecarx 本就不暴露标准属性服务，已优雅降级）、座椅通风 `rawLevel` 大值（HVAC 解包前原始值）、电池瞬时 `published=null`（连接首帧瞬时）。
+
+### 安装包校验
+
+| 文件 | SHA-256 |
+| --- | --- |
+| `galaxylink-toolkit-nohud-v0.0.1.4-beta-debug.apk` | `520ecaae322ccac5bf4ca55096794752018d7f6986981b1b1a15a23a82c69c8e` |
 
 ## v0.0.1.3 (beta)
 
