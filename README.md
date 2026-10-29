@@ -35,7 +35,8 @@
 
 | 版本 | 渠道 | 最低系统 | 说明 |
 | --- | --- | --- | --- |
-| **v0.0.1.4（最新）** | beta | Android 9 (API 28) | 新增前后超声波雷达（泊车辅助 PAS）探测日志（PDC 诊断 + 前/后 × 内/外左/右 8 路传感器）；修复前碰撞预警 FCW 灵敏度取不到的问题（改用 getCllsnFwdWarn） |
+| **v0.0.1.6（最新）** | beta | Android 9 (API 28) | 「检测更新」面板从「通用」页迁入「状态」页并重命名；移除「启动自动检查更新」改为手动点击确认；移除 ExoPlayer 改用系统 MediaPlayer，APK 14.0 MB → 12.0 MB |
+| v0.0.1.4 | beta | Android 9 (API 28) | 新增前后超声波雷达（泊车辅助 PAS）探测日志（PDC 诊断 + 前/后 × 内/外左/右 8 路传感器）；修复前碰撞预警 FCW 灵敏度取不到的问题（改用 getCllsnFwdWarn） |
 | v0.0.1.3 | beta | Android 9 (API 28) | beta 版本号改为「小时点 + 组内序号」分组（第四段满 100 进位第三段），序号 102 → 0.0.1.2、本版 → 0.0.1.3，版本号连续不跳号 |
 | v0.0.0.102 | beta | Android 9 (API 28) | 在线更新地址改为 `?api=1` 并适配接口扁平响应结构（顶层 tag + apks），保留旧结构兼容；补充真实接口样本单测 |
 | v0.0.0.101 | beta | Android 9 (API 28) | 移除启动页二维码资源；启用体积压缩（R8 full mode + so 压缩 + 资源裁剪 + 移除 ui-tooling），APK 15.0 MB → 13.8 MB |
@@ -46,10 +47,10 @@
 安装包为 **Debug 签名**，可直接安装：
 
 ```bash
-adb install -r galaxylink-toolkit-nohud-v0.0.1.4-beta-debug.apk
+adb install -r galaxylink-toolkit-nohud-v0.0.1.6-beta-debug.apk
 ```
 
-SHA-256：`520ecaae322ccac5bf4ca55096794752018d7f6986981b1b1a15a23a82c69c8e`
+SHA-256：`1c88f5d13bf2b59c35cdb49133d47a7b03ed5cbedab8518e3fdcf89b16d1dd6c`
 
 > 需要车机已授予相应权限（悬浮球、后台运行、无障碍等）。首次安装后可在「通用 → 界面显示」中开启相关页面入口。
 

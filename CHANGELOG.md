@@ -8,7 +8,19 @@
 > - **本地仓库 `releases/` 目录：只保留最新版本安装包** —— 旧版安装包不在仓库内累积，避免体积膨胀。
 > - 本文件的变更记录永久保留。
 >
-> 当前最新：**v0.0.1.4** → `releases/v0.0.1.4/galaxylink-toolkit-nohud-v0.0.1.4-beta-debug.apk`
+> 当前最新：**v0.0.1.6** → `releases/v0.0.1.6/galaxylink-toolkit-nohud-v0.0.1.6-beta-debug.apk`
+
+## v0.0.1.6 (beta)
+
+- **「检测更新」面板从「通用」页迁入「状态」页并重命名**：原「关于与更新」面板移出通用设置，改置于状态页，标题统一为「检测更新」，更新来源选择、检查更新按钮与状态提示保留。
+- **移除「启动自动检查更新」，改为手动确认**：删除该开关及启动静默检查逻辑（`GalaxyLinkAppUpdateCoordinator.onAppLaunch` / `setAutoCheck` / `autoCheck` 字段，以及 `GalaxyLinkApp` 启动检查调用），用户需自行点击「检查更新」按钮确认升级。
+- **移除 ExoPlayer 改用系统 MediaPlayer（体积优化）**：迎宾视频投影、迎宾编辑预览由 `androidx.media3` 改为 `android.media.MediaPlayer`，移除 `media3-exoplayer` / `media3-ui` 依赖，APK 体积约 14.0MB → 12.0MB（与上一工作树 v0.0.1.5 合并发布）。
+
+### 安装包校验
+
+| 文件 | SHA-256 |
+| --- | --- |
+| `galaxylink-toolkit-nohud-v0.0.1.6-beta-debug.apk` | `1c88f5d13bf2b59c35cdb49133d47a7b03ed5cbedab8518e3fdcf89b16d1dd6c` |
 
 ## v0.0.1.4 (beta)
 
