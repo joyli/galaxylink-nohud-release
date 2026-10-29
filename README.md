@@ -35,7 +35,8 @@
 
 | 版本 | 渠道 | 最低系统 | 说明 |
 | --- | --- | --- | --- |
-| **v0.0.1.11（最新）** | beta | Android 9 (API 28) | 修复「调试」页点击无反应：调试路由改为常驻 NavGraph（原按开关条件注册，图中无该目的地导致 navigate 抛异常且被静默吞掉）；侧栏导航失败补日志 |
+| **v0.0.1.12（最新）** | beta | Android 9 (API 28) | 修复 1920×720 车机显示不正常：等比缩放改为宽高双向取更严格一侧（contain），纵向逻辑高度 495dp → 600dp，内容不再裁切；缩放改由 LocalConfiguration 驱动，车机改分辨率后实时重算 |
+| v0.0.1.11 | beta | Android 9 (API 28) | 修复「调试」页点击无反应：调试路由改为常驻 NavGraph（原按开关条件注册，图中无该目的地导致 navigate 抛异常且被静默吞掉）；侧栏导航失败补日志 |
 | v0.0.1.10 | beta | Android 9 (API 28) | 修复「调试」页点击后打不开：侧栏可见路由列表的缓存 key 漏掉调试页开关，开启后入口不刷新 |
 | v0.0.1.9 | beta | Android 9 (API 28) | 调试页可隐藏（连点侧栏「通用」5 次切换显隐，首次安装默认隐藏）；修复 Gitee/GitHub 检查更新 404（更新仓库名 galaxylink-releases → galaxylink-nohud-release、选型取最大版本）；全局等比缩放（按真实分辨率换算 density，任意车机屏 UI 比例一致） |
 | v0.0.1.6 | beta | Android 9 (API 28) | 「检测更新」面板从「通用」页迁入「状态」页并重命名；移除「启动自动检查更新」改为手动点击确认；移除 ExoPlayer 改用系统 MediaPlayer，APK 14.0 MB → 12.0 MB |
@@ -50,10 +51,10 @@
 安装包为 **Debug 签名**，可直接安装：
 
 ```bash
-adb install -r galaxylink-toolkit-nohud-v0.0.1.11-beta-debug.apk
+adb install -r galaxylink-toolkit-nohud-v0.0.1.12-beta-debug.apk
 ```
 
-SHA-256：`4a3620ec0cf1f8ed51bdaac7ead3f34954521d0f709de3c64ea48999ebc3937a`
+SHA-256：`9399636cb78f96c62b1f8324cdc96816bf74a44b2ec97722e7fadd17c96a38c1`
 
 > 需要车机已授予相应权限（悬浮球、后台运行、无障碍等）。首次安装后可在「通用 → 界面显示」中开启相关页面入口。
 
