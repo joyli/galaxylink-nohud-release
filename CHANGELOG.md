@@ -8,7 +8,21 @@
 > - **本地仓库 `releases/` 目录：只保留最新版本安装包** —— 旧版安装包不在仓库内累积，避免体积膨胀。
 > - 本文件的变更记录永久保留。
 >
-> 当前最新：**v0.0.1.6** → `releases/v0.0.1.6/galaxylink-toolkit-nohud-v0.0.1.6-beta-debug.apk`
+> 当前最新：**v0.0.1.9** → `releases/v0.0.1.9/galaxylink-toolkit-nohud-v0.0.1.9-beta-debug.apk`
+
+## v0.0.1.9 (beta)
+
+- **调试页可隐藏（连点侧栏「通用」5 次切换显隐，首次安装默认隐藏）**：侧栏「调试」入口受 `GeneralSettings.debugPageEnabled` 控制（DataStore 持久化，默认 `false`）；连续点击侧栏「通用」达到 5 次（`SecretTapCount`，相邻两次间隔 ≤ 2s）切换显隐并 Toast 提示，复用既有「连点状态切车辆信息页」的机密点击逻辑。NavHost 的调试页路由同步以 `debugPageEnabled` 守卫，隐藏时自动重定向到首个可见页面。
+- **修复 Gitee / GitHub 检查更新 404**：更新客户端仓库名由 `galaxylink-releases` 修正为 `galaxylink-nohud-release`（与 AGENTS.md 一致）；更新选型由「取第一个匹配项」改为「取版本号最大的一条」，规避 Gitee 旧→新排序误取旧版（如 `v0.0.0.88`）。
+- **全局等比缩放（按真实分辨率适配）**：`MainActivity` 启动时读取屏幕真实宽度（px），按设计宽度 1320dp 换算全局 density 并注入 `LocalDensity`，任意车机屏 UI 元素比例与单屏可见内容量一致，不再受系统密度差异导致单/双栏布局乱跳。
+
+> 注：v0.0.1.7（Gitee 404 修复）、v0.0.1.8（等比缩放）仅在本地构建、未单独对外发布，本版合并承载其全部变更。
+
+### 安装包校验
+
+| 文件 | SHA-256 |
+| --- | --- |
+| `galaxylink-toolkit-nohud-v0.0.1.9-beta-debug.apk` | `41ca08c471a0e2f4ebf76a1ca1c265a5e1dc4ea339a4ab686b9e4d30a80c82c8` |
 
 ## v0.0.1.6 (beta)
 
