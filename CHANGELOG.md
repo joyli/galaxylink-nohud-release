@@ -8,7 +8,24 @@
 > - **本地仓库 `releases/` 目录：只保留最新版本安装包** —— 旧版安装包不在仓库内累积，避免体积膨胀。
 > - 本文件的变更记录永久保留。
 >
-> 当前最新：**v0.0.0.99** → `releases/v0.0.0.99/galaxylink-toolkit-nohud-v0.0.0.99-beta-debug.apk`
+> 当前最新：**v0.0.0.101** → `releases/v0.0.0.101/galaxylink-toolkit-nohud-v0.0.0.101-beta-debug.apk`
+
+## v0.0.0.101 (beta)
+
+- **移除启动页二维码图片**：删除 `startup_qr.jpg`（162 KB）及其启动页展示块，启动页左侧信息区自适应填充。
+- **启用安装包体积压缩**：APK 从 **15.0 MB 降至 13.8 MB**（-0.55 MB / -3.8%）。
+  - 开启 **R8 full mode**（`android.enableR8.fullMode=true`），启用全模式优化以压缩 dex。
+  - **移除 debug-only 的 `compose.ui-tooling` 依赖**（项目内零处 `@Preview` 使用），该库仅供 IDE 预览使用，却会带入大量运行时代码。
+  - **native 库改为压缩存储**（`useLegacyPackaging = true`），`.so` 压缩比约 40%~58%。
+  - **剔除无用打包文件**（`kotlin_module`、`DebugProbesKt.bin`、`kotlin-tooling-metadata.json` 等 META-INF 条目）。
+  - **移除 dex 行号表**（`LineNumberTable`），保留 `SourceFile` 以维持日志中类名可读性。
+  - 补充资源保护规则（`-keep class **.R$drawable**`），确保资源缩减不会误删 vector drawable 图标。
+
+### 安装包校验
+
+| 文件 | SHA-256 |
+| --- | --- |
+| `galaxylink-toolkit-nohud-v0.0.0.101-beta-debug.apk` | `a21e35603e0b594e11b344c3021f4177c8ce8aabc677c9640d4aae9757844366` |
 
 ## v0.0.0.99 (beta)
 
