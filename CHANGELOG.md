@@ -8,7 +8,17 @@
 > - **本地仓库 `releases/` 目录：只保留最新版本安装包** —— 旧版安装包不在仓库内累积，避免体积膨胀。
 > - 本文件的变更记录永久保留。
 >
-> 当前最新：**v0.0.1.9** → `releases/v0.0.1.9/galaxylink-toolkit-nohud-v0.0.1.9-beta-debug.apk`
+> 当前最新：**v0.0.1.10** → `releases/v0.0.1.10/galaxylink-toolkit-nohud-v0.0.1.10-beta-debug.apk`
+
+## v0.0.1.10 (beta)
+
+- **修复「调试」页点击后打不开**：侧栏可见路由列表 `visibleRoutes` 的 `remember` 缓存 key 只包含 `vehicleInfoPageEnabled`，遗漏了 `debugPageEnabled`。导致连点「通用」5 次开启调试页后，开关状态虽已写入 DataStore，但侧栏列表不重算、「调试」入口不出现、点击无响应。补齐 key 后入口即时出现，点击即可进入调试界面。
+
+### 安装包校验
+
+| 文件 | SHA-256 |
+| --- | --- |
+| `galaxylink-toolkit-nohud-v0.0.1.10-beta-debug.apk` | `db10fa30b173452762dc953432907f40cc83909fe0f95af4652637327cbd5dd1` |
 
 ## v0.0.1.9 (beta)
 

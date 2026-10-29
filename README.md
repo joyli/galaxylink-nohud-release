@@ -35,7 +35,8 @@
 
 | 版本 | 渠道 | 最低系统 | 说明 |
 | --- | --- | --- | --- |
-| **v0.0.1.9（最新）** | beta | Android 9 (API 28) | 调试页可隐藏（连点侧栏「通用」5 次切换显隐，首次安装默认隐藏）；修复 Gitee/GitHub 检查更新 404（更新仓库名 galaxylink-releases → galaxylink-nohud-release、选型取最大版本）；全局等比缩放（按真实分辨率换算 density，任意车机屏 UI 比例一致） |
+| **v0.0.1.10（最新）** | beta | Android 9 (API 28) | 修复「调试」页点击后打不开：侧栏可见路由列表的缓存 key 漏掉调试页开关，开启后入口不刷新 |
+| v0.0.1.9 | beta | Android 9 (API 28) | 调试页可隐藏（连点侧栏「通用」5 次切换显隐，首次安装默认隐藏）；修复 Gitee/GitHub 检查更新 404（更新仓库名 galaxylink-releases → galaxylink-nohud-release、选型取最大版本）；全局等比缩放（按真实分辨率换算 density，任意车机屏 UI 比例一致） |
 | v0.0.1.6 | beta | Android 9 (API 28) | 「检测更新」面板从「通用」页迁入「状态」页并重命名；移除「启动自动检查更新」改为手动点击确认；移除 ExoPlayer 改用系统 MediaPlayer，APK 14.0 MB → 12.0 MB |
 | v0.0.1.4 | beta | Android 9 (API 28) | 新增前后超声波雷达（泊车辅助 PAS）探测日志（PDC 诊断 + 前/后 × 内/外左/右 8 路传感器）；修复前碰撞预警 FCW 灵敏度取不到的问题（改用 getCllsnFwdWarn） |
 | v0.0.1.3 | beta | Android 9 (API 28) | beta 版本号改为「小时点 + 组内序号」分组（第四段满 100 进位第三段），序号 102 → 0.0.1.2、本版 → 0.0.1.3，版本号连续不跳号 |
@@ -48,10 +49,10 @@
 安装包为 **Debug 签名**，可直接安装：
 
 ```bash
-adb install -r galaxylink-toolkit-nohud-v0.0.1.9-beta-debug.apk
+adb install -r galaxylink-toolkit-nohud-v0.0.1.10-beta-debug.apk
 ```
 
-SHA-256：`41ca08c471a0e2f4ebf76a1ca1c265a5e1dc4ea339a4ab686b9e4d30a80c82c8`
+SHA-256：`db10fa30b173452762dc953432907f40cc83909fe0f95af4652637327cbd5dd1`
 
 > 需要车机已授予相应权限（悬浮球、后台运行、无障碍等）。首次安装后可在「通用 → 界面显示」中开启相关页面入口。
 
