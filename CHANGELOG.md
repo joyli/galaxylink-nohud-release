@@ -8,7 +8,23 @@
 > - **本地仓库 `releases/` 目录：只保留最新版本安装包** —— 旧版安装包不在仓库内累积，避免体积膨胀。
 > - 本文件的变更记录永久保留。
 >
-> 当前最新：**v0.0.0.101** → `releases/v0.0.0.101/galaxylink-toolkit-nohud-v0.0.0.101-beta-debug.apk`
+> 当前最新：**v0.0.0.102** → `releases/v0.0.0.102/galaxylink-toolkit-nohud-v0.0.0.102-beta-debug.apk`
+
+## v0.0.0.102 (beta)
+
+- **在线更新地址与响应适配**：更新接口地址改为 `https://www.izhuoe.com/galaxylink-release-parser.php?api=1`（原 `?format=json`）。
+  - 接口现行返回为**扁平结构**（`success` / `source` / `tag` / `version` / `prerelease` / `notes` / `history` / `apks`），
+    与原先按`platforms.*.releases[]` + `latest.downloads[]` 嵌套结构解析的实现不匹配，会导致更新检查取不到安装包。
+  - 现改为优先按扁平结构解析：顶层 `tag` 匹配渠道时取 `apks` 中首个 `.apk` 作为下载地址与大小；
+    `apks` 仅携带最新版本的安装包，因此不会跨渠道复用（最新为beta 时不会把 beta 包当作 stable 提供）。
+  - 旧版嵌套结构解析保留为兼容回退，接口结构回退时仍可工作。
+  - 补充真实接口响应样本的单测（`parser_api1_sample.json`），确保解析逻辑与线上实际返回保持一致。
+
+### 安装包校验
+
+| 文件 | SHA-256 |
+| --- | --- |
+| `galaxylink-toolkit-nohud-v0.0.0.102-beta-debug.apk` | `a1aa0ecc23545d9e7fe9261b5d4d50c8de0d1120fc2aa0daea08beb5791e96f3` |
 
 ## v0.0.0.101 (beta)
 
