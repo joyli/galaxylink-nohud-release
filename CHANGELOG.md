@@ -8,7 +8,18 @@
 > - **本地仓库 `releases/` 目录：只保留最新版本安装包** —— 旧版安装包不在仓库内累积，避免体积膨胀。
 > - 本文件的变更记录永久保留。
 >
-> 当前最新：**v0.0.1.10** → `releases/v0.0.1.10/galaxylink-toolkit-nohud-v0.0.1.10-beta-debug.apk`
+> 当前最新：**v0.0.1.11** → `releases/v0.0.1.11/galaxylink-toolkit-nohud-v0.0.1.11-beta-debug.apk`
+
+## v0.0.1.11 (beta)
+
+- **修复「调试」页点击无反应**：调试页路由改为**常驻 NavGraph**。原先在 NavHost 的 builder 内按 `if (BuildConfig.DEBUG && generalSettings.debugPageEnabled)` 条件注册路由，而 NavHost 的 builder 被 `remember(route, startDestination, builder)` 缓存、图仅在启动时构建一次（builder 捕获的是 State 实例，引用不变），导致开关开启后图中并无 `debug` 目的地，点击时 `navigate("debug")` 抛 `IllegalArgumentException`，又被外层 `runCatching` 静默吞掉——表现为「点击无反应、无崩溃、无日志」。现改为路由常驻注册，显隐由侧栏 `visibleRoutes` 与页面内守卫（`BuildConfig.DEBUG && debugPageEnabled`）控制。
+- **侧栏导航失败补日志**：`runCatching` 增加 `onFailure` 分支，写入 `GalaxyLinkShell` 错误日志（`侧栏导航失败: route=xxx`），避免后续同类问题再次「点了没反应」却无迹可循。
+
+### 安装包校验
+
+| 文件 | SHA-256 |
+| --- | --- |
+| `galaxylink-toolkit-nohud-v0.0.1.11-beta-debug.apk` | `4a3620ec0cf1f8ed51bdaac7ead3f34954521d0f709de3c64ea48999ebc3937a` |
 
 ## v0.0.1.10 (beta)
 
