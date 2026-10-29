@@ -8,7 +8,18 @@
 > - **本地仓库 `releases/` 目录：只保留最新版本安装包** —— 旧版安装包不在仓库内累积，避免体积膨胀。
 > - 本文件的变更记录永久保留。
 >
-> 当前最新：**v0.0.1.13** → `releases/v0.0.1.13/galaxylink-toolkit-nohud-v0.0.1.13-beta-debug.apk`
+> 当前最新：**v0.0.1.14** → `releases/v0.0.1.14/galaxylink-toolkit-nohud-v0.0.1.14-beta-debug.apk`
+
+## v0.0.1.14 (beta)
+
+- **修复前后雷达探测日志始终 0 条**：雷达探测日志由 `EcarxCabinSignalController.pollRadar()` 产出（1.5s 轮询，状态变化或15s 心跳时落盘），但该控制器此前**仅在打开「车辆信息」页时创建**，而该页默认隐藏（需连点侧栏「状态」5 次才显示），导致控制器从未实例化、`pollRadar` 从未执行，日志里连 `PAS manager` 相关记录都没有。现参照车门/行驶信号控制器的方式，在 `GalaxyLinkApplication` 中改为**全局常驻**（`obtain` 为线程安全单例，与页面共用同一实例，不会重复创建），雷达日志与 PDC 诊断从应用启动起即可记录。
+- 验证：v0.0.1.13 实测日志（2026-10-30 06:43~ 06:47）确认 `radar detection` 0 条、且无任何 `GalaxyLinkCabinSignal` tag 记录，仅有 DoorSignal / DriveSignal / Trunk / Ignition 四个控制器，佐证座舱信号控制器当时未启动。
+
+### 安装包校验
+
+| 文件 | SHA-256 |
+| --- | --- |
+| `galaxylink-toolkit-nohud-v0.0.1.14-beta-debug.apk` | `9b599f3b1e66201cf87ca21a1232f1c46109538179878a897d71aaa52bd83fd3` |
 
 ## v0.0.1.13 (beta)
 
