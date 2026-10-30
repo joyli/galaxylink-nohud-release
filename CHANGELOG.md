@@ -8,7 +8,18 @@
 > - **本地仓库 `releases/` 目录：只保留最新版本安装包** —— 旧版安装包不在仓库内累积，避免体积膨胀。
 > - 本文件的变更记录永久保留。
 >
-> 当前最新：**v0.0.1.15** → `releases/v0.0.1.15/galaxylink-toolkit-nohud-v0.0.1.15-beta-debug.apk`
+> 当前最新：**v0.0.1.16** → `releases/v0.0.1.16/galaxylink-toolkit-nohud-v0.0.1.16-beta-debug.apk`
+
+## v0.0.1.16 (beta)
+
+- **修复点击「所需应用权限」导致 APP 崩溃退出**：状态页权限总览行点击后调用 `openPermissionTarget()` 跳转系统设置页。该车机/定制 ROM 未注册处理 `android.settings.SETTINGS` 等设置 Action 的 Activity，原代码虽在 `try` 内捕获 `ActivityNotFoundException`，但回退的 `startActivity(Settings.ACTION_SETTINGS)` 写在 `catch` 块里、**不在 `try` 内且无预检**，再次抛出后无人捕获，主线程 FATAL EXCEPTION 直接杀掉进程。对应日志：`FATAL EXCEPTION on main / ActivityNotFoundException: No Activity found to handle Intent { act=android.settings.SETTINGS ... }`（`StatusPageKt.openPermissionTarget` 第 1709 行）。
+- **修复方案**：将原逻辑改为**候选 Intent 优先级列表**——首选该权限专属设置页（无障碍/通知监听/悬浮窗/电池优化/全部文件/未知来源/应用详情），其次本应用详情页（`ACTION_APPLICATION_DETAILS_SETTINGS`，含权限开关，最实用的兜底），最后通用设置（`ACTION_SETTINGS`）；每个候选先 `resolveActivity(pm) != null` 预检、`runCatching { startActivity }` 逐项回退；全部不可解析时弹 Toast 提示「当前系统未提供设置入口，请通过车机系统手动授权」，彻底避免崩溃。
+
+### 安装包校验
+
+| 文件 | SHA-256 |
+| --- | --- |
+| `galaxylink-toolkit-nohud-v0.0.1.16-beta-debug.apk` | `c6b88831cf5d9079c3aa1b8920ccc67668b2971429b6aa194a744e6a61d333a4` |
 
 ## v0.0.1.15 (beta)
 
