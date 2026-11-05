@@ -8,7 +8,13 @@
 > - **本地仓库 `releases/` 目录：只保留最新版本安装包** —— 旧版安装包不在仓库内累积，避免体积膨胀。
 > - 本文件的变更记录永久保留。
 >
-> 当前最新：**v0.0.1.89** → `releases/v0.0.1.89/galaxylink-toolkit-nohud-v0.0.1.89-beta-debug.apk`
+> 当前最新：**v0.0.1.90** → `releases/v0.0.1.90/galaxylink-toolkit-nohud-v0.0.1.90-beta-debug.apk`
+
+## v0.0.1.90 (beta)
+- 接入 GalaxyTrack 应用分发与设备追踪（izhuoe.com）：按 GT1 协议（AES-256-CBC + HMAC-SHA256 Encrypt-then-MAC、±300s 防重放、时钟校准）实现加密通信
+- 设备安全：`device_secret` 经 Android Keystore（AES-GCM）加密存储，不落明文；`bootstrap_secret` 随包内置，仅用于首次注册
+- 应用启动即自动注册设备，并按版本变化上报安装（幂等 `report_id`）、每 30 分钟发送心跳；链路失败静默，不阻塞主流程
+- 「检测更新」来源新增「GalaxyTrack」选项（保留现有 Gitee/GitHub/解析源）
 
 ## v0.0.1.89 (beta)
 - 修复方向盘联动 360 回正后不立即关闭：根因是方向盘转角随全量信号每 2 秒才采样一次，程序要等下一次采样才知道已回正
