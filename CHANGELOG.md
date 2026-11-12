@@ -8,7 +8,7 @@
 > - **本地仓库 `releases/` 目录：只保留最新版本安装包** —— 旧版安装包不在仓库内累积，避免体积膨胀。
 > - 本文件的变更记录永久保留。
 >
-> 当前最新：**v0.0.2.19** → `releases/v0.0.2.19/galaxylink-toolkit-nohud-v0.0.2.19-beta-debug.apk`
+> 当前最新：**v0.0.2.20** → `releases/v0.0.2.20/galaxylink-toolkit-nohud-v0.0.2.20-beta-debug.apk`
 
 ## v0.0.2.19 (beta)
 - **日志补充设备信息与车辆 VIN**：新增 `Log.recordDeviceIdentity`，在日志文件内追加带分隔线的设备身份块（时间、应用版本/渠道、机型/Android 版本、设备ID、车架号 VIN）。启动即落一份，待 GalaxyTrack 注册成功、VIN 解析后自动补写更完整的身份块（含车架号），去重避免刷屏，每进程至少落盘一次
