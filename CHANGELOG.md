@@ -8,7 +8,11 @@
 > - **本地仓库 `releases/` 目录：只保留最新版本安装包** —— 旧版安装包不在仓库内累积，避免体积膨胀。
 > - 本文件的变更记录永久保留。
 >
-> 当前最新：**v0.0.2.17** → `releases/v0.0.2.17/galaxylink-toolkit-nohud-v0.0.2.17-beta-debug.apk`
+> 当前最新：**v0.0.2.18** → `releases/v0.0.2.18/galaxylink-toolkit-nohud-v0.0.2.18-beta-debug.apk`
+
+## v0.0.2.18 (beta)
+- **调整 GalaxyTrack 设置页入口**：移除「车辆档案」（含 `queryVehicle` 调用与数据类 `GalaxyTrackVehicleProfile`）；「上传日志」从「通用」页移入**调试页**日志区工具栏（连点侧栏「通用」5 次进入），与日志查看/分享/导出并列，便于排查时一键上传
+- `log.upload` 上传能力保留（仅 UI 入口迁移），`vehicle.query` 链路整体移除；单测 476 全绿（减少车辆档案 2 例）、打包校验通过
 
 ## v0.0.2.17 (beta)
 - **GalaxyTrack 接入完善**（对照官方 11 份 API / 接入文档逐项补齐，GT1 加密协议层完全对齐、未改动）
