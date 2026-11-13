@@ -8,7 +8,14 @@
 > - **本地仓库 `releases/` 目录：只保留最新版本安装包** —— 旧版安装包不在仓库内累积，避免体积膨胀。
 > - 本文件的变更记录永久保留。
 >
-> 当前最新：**v0.0.2.21** → `releases/v0.0.2.21/galaxylink-toolkit-nohud-v0.0.2.21-beta-debug.apk`
+> 当前最新：**v0.0.2.22** → `releases/v0.0.2.22/galaxylink-toolkit-nohud-v0.0.2.22-beta-debug.apk`
+
+## v0.0.2.22 (beta)
+- **按《GalaxyLink App 端接口接入文档》(APP-API.html v1.1) 重新接入服务端**：新增 `system/galaxylink` 包，接入新版官方 REST（`https://www.izhuoe.com/galaxylink/public`，明文 JSON `{code,message,data,time}`），与旧 `galaxytrack` GT1 加密协议是两套系统、并行保留。统一响应解析（401 也读 body）、进程内 CookieJar、`Bearer` 预留、显式 JSON Content-Type
+- **设备侧接入**：`device/register`（`device_id` 复用旧通道 UUID）→ `device/verify-key` → 周期 `device/heartbeat`；`api_key`/`user_token`/激活态经 Android Keystore AES-GCM 加密持久化
+- **邀请码门禁（不输入邀请码只显状态页 + 一机一码）**：`user/check-invite` 校验 8 位码 → `device/register` 带 `invite_code` 关联设备与码 → 本地加密激活态绑定 `device_id`+`VIN`；未激活时侧栏只留状态页、NavHost 各页加守卫防返回栈直达、状态页顶部展示激活卡片；覆盖安装的既有用户自动放行，避免升级后设置项消失
+- **升级检查新增 GalaxyLink 官方源**：`/api/version/check`（`has_update` 先判再取 `version`、校验 `min_sdk`、兼容 `force_update`、下载前 `apk_sha256` 校验），包名/渠道用后台实际值；「更新位置」下拉与更新弹窗来源标签同步补齐
+- **旧 GT1 通道保留**：`log.upload`（上传日志）/ `install.report`（VIN 车辆档案）/ `push.ack`（推送回执）三项新后端没有的能力继续由旧通道承载。491 单测全绿、打包校验通过
 
 ## v0.0.2.21 (beta)
 - **日志生成规则改为绑定 dock 栏「调试」选项显隐**（用户要求「dock 栏隐藏调试选项不生成 log 信息，dock 栏显示就一直生成 log 信息」）：新增纯决策层 `shouldGenerateLogs(debugPageEnabled, isDebugBuild)`，与侧栏「调试」入口显隐判定严格一致；`Application` 启动时按持久化 `debug_page_enabled` 初始化日志开关（显示则连启动阶段日志也不丢、隐藏则全程不落盘），连点侧栏「通用」5 次切换时即时同步开关并按需补写设备身份块；移除上一版「进入调试页才开日志」逻辑。logcat 输出始终不受影响。480 单测全绿、打包校验通过
