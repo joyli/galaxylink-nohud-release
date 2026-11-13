@@ -8,7 +8,13 @@
 > - **本地仓库 `releases/` 目录：只保留最新版本安装包** —— 旧版安装包不在仓库内累积，避免体积膨胀。
 > - 本文件的变更记录永久保留。
 >
-> 当前最新：**v0.0.2.20** → `releases/v0.0.2.20/galaxylink-toolkit-nohud-v0.0.2.20-beta-debug.apk`
+> 当前最新：**v0.0.2.21** → `releases/v0.0.2.21/galaxylink-toolkit-nohud-v0.0.2.21-beta-debug.apk`
+
+## v0.0.2.21 (beta)
+- **日志生成规则改为绑定 dock 栏「调试」选项显隐**（用户要求「dock 栏隐藏调试选项不生成 log 信息，dock 栏显示就一直生成 log 信息」）：新增纯决策层 `shouldGenerateLogs(debugPageEnabled, isDebugBuild)`，与侧栏「调试」入口显隐判定严格一致；`Application` 启动时按持久化 `debug_page_enabled` 初始化日志开关（显示则连启动阶段日志也不丢、隐藏则全程不落盘），连点侧栏「通用」5 次切换时即时同步开关并按需补写设备身份块；移除上一版「进入调试页才开日志」逻辑。logcat 输出始终不受影响。480 单测全绿、打包校验通过
+
+## v0.0.2.20 (beta)
+- **调试隐藏时不再主动生成日志文件**：`Log` 新增磁盘日志总开关（默认关闭），`appendFile`/`recordDeviceIdentity` 在关闭时跳过写盘（logcat 不受影响）；仅打开隐藏调试界面后由 UI 置开关为开并补写设备身份块，此后才落盘；单测全绿、打包校验通过（自 v0.0.2.21 起规则改为绑定 dock 栏「调试」选项显隐）
 
 ## v0.0.2.19 (beta)
 - **日志补充设备信息与车辆 VIN**：新增 `Log.recordDeviceIdentity`，在日志文件内追加带分隔线的设备身份块（时间、应用版本/渠道、机型/Android 版本、设备ID、车架号 VIN）。启动即落一份，待 GalaxyTrack 注册成功、VIN 解析后自动补写更完整的身份块（含车架号），去重避免刷屏，每进程至少落盘一次
