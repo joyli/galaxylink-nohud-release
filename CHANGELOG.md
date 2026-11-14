@@ -8,7 +8,11 @@
 > - **本地仓库 `releases/` 目录：只保留最新版本安装包** —— 旧版安装包不在仓库内累积，避免体积膨胀。
 > - 本文件的变更记录永久保留。
 >
-> 当前最新：**v0.0.2.23** → `releases/v0.0.2.23/galaxylink-toolkit-nohud-v0.0.2.23-beta-debug.apk`
+> 当前最新：**v0.0.2.24** → `releases/v0.0.2.24/galaxylink-toolkit-nohud-v0.0.2.24-beta-debug.apk`
+
+## v0.0.2.24 (beta)
+- **调试页「上传日志」按钮按最新 APP-API.html 接入新版日志上传**：`POST /api/device/upload-log`（`multipart/form-data`，字段 `api_key`+`file`+`remark`），替换原 GalaxyTrack GT1 `log.upload` 通道；未选中文件时回退上传最近一份日志
+- 新增 `GalaxyLinkApi.uploadLogFile`（HttpURLConnection 手写 multipart 边界，项目无 OkHttp）、`GalaxyLinkUploadPolicy` 纯决策层（扩展名/10MB 上限/remark≤255 校验，含单测）；`GalaxyLinkManager.uploadLog` 先做本地校验再上传，remark 带 `device_id` 便于后台区分设备；旧 GT1 `log.upload` 仅保留兼容层。497 单测全绿、打包校验通过
 
 ## v0.0.2.23 (beta)
 - **修复「刚生成的邀请码一输入就提示『已被使用或已停用』」的误读与激活死局**：服务端实测 `check-invite` 为只读（同一码连查 3 次状态稳定），该文案按文档 §895 覆盖「未发放 / 已使用 / 已停用」三种状态，刚生成但未发放的码同样命中，并非「输入一次就被消费」
