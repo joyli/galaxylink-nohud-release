@@ -8,7 +8,13 @@
 > - **本地仓库 `releases/` 目录：只保留最新版本安装包** —— 旧版安装包不在仓库内累积，避免体积膨胀。
 > - 本文件的变更记录永久保留。
 >
-> 当前最新：**v0.0.2.22** → `releases/v0.0.2.22/galaxylink-toolkit-nohud-v0.0.2.22-beta-debug.apk`
+> 当前最新：**v0.0.2.23** → `releases/v0.0.2.23/galaxylink-toolkit-nohud-v0.0.2.23-beta-debug.apk`
+
+## v0.0.2.23 (beta)
+- **修复「刚生成的邀请码一输入就提示『已被使用或已停用』」的误读与激活死局**：服务端实测 `check-invite` 为只读（同一码连查 3 次状态稳定），该文案按文档 §895 覆盖「未发放 / 已使用 / 已停用」三种状态，刚生成但未发放的码同样命中，并非「输入一次就被消费」
+- **错误提示增强**：对「已被使用或已停用」追加可操作说明，引导到后台确认码状态为「已发放待激活」、必要时重新生成并发放新码
+- **激活链路加固**：`check-invite` 校验通过即写本地加密激活态解锁，带码 `device/register` 降级为尽力而为的后台关联（失败只记日志），消除「码已被消费但本机未解锁、重试永远报已使用」的死局
+- 491 单测全绿、打包闸门全通过
 
 ## v0.0.2.22 (beta)
 - **按《GalaxyLink App 端接口接入文档》(APP-API.html v1.1) 重新接入服务端**：新增 `system/galaxylink` 包，接入新版官方 REST（`https://www.izhuoe.com/galaxylink/public`，明文 JSON `{code,message,data,time}`），与旧 `galaxytrack` GT1 加密协议是两套系统、并行保留。统一响应解析（401 也读 body）、进程内 CookieJar、`Bearer` 预留、显式 JSON Content-Type

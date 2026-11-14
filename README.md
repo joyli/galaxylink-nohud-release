@@ -33,7 +33,8 @@
 
 | 版本 | 渠道 | 最低系统 | 说明 |
 | --- | --- | --- | --- |
-| **v0.0.2.22（最新）** | beta | Android 9 (API 28) | **按 APP-API.html v1.1 重新接入 GalaxyLink 新版官方 REST**：新增 `system/galaxylink` 包（`galaxylink/public`，明文 JSON 统一响应），设备登记/密钥校验/心跳/版本检查全切新接口；**邀请码门禁**：状态页输 8 位码（`check-invite` 校验 + `device/register` 带码关联）→ 本地加密激活态绑定 device_id+VIN，未激活只显状态页且各页加守卫，覆盖安装老用户自动放行；升级检查新增 `galaxylink` 官方源（`/api/version/check`）；旧 GT1 通道保留上传日志/安装上报/推送回执。491 单测全绿、打包校验通过 |
+| **v0.0.2.23（最新）** | beta | Android 9 (API 28) | **修复邀请码「刚生成即提示已被使用或已停用」的误读与激活死局**：实测 `check-invite` 为只读、该文案按文档 §895 覆盖「未发放/已使用/已停用」三种状态（刚生成未发放的码也会命中，并非输入即被消费）；错误提示追加可操作说明（引导核对后台码为「已发放待激活」或重新发放）；激活链路改为校验通过即写本地加密激活态解锁，带码 `device/register` 降级为尽力而为的后台关联，消除「码已消费但本机未解锁、重试永远报已使用」的死局。491 单测全绿、打包校验通过 |
+| v0.0.2.22 | beta | Android 9 (API 28) | **按 APP-API.html v1.1 重新接入 GalaxyLink 新版官方 REST**：新增 `system/galaxylink` 包（`galaxylink/public`，明文 JSON 统一响应），设备登记/密钥校验/心跳/版本检查全切新接口；**邀请码门禁**：状态页输 8 位码（`check-invite` 校验 + `device/register` 带码关联）→ 本地加密激活态绑定 device_id+VIN，未激活只显状态页且各页加守卫，覆盖安装老用户自动放行；升级检查新增 `galaxylink` 官方源（`/api/version/check`）；旧 GT1 通道保留上传日志/安装上报/推送回执。491 单测全绿、打包校验通过 |
 | v0.0.2.21 | beta | Android 9 (API 28) | **日志生成规则改为绑定 dock 栏「调试」选项显隐**：新增纯决策层 `shouldGenerateLogs`，与侧栏「调试」入口显隐严格一致——隐藏则不生成 log、显示则一直生成；`Application` 启动按持久化值初始化开关（显示连启动日志也不丢），连点侧栏「通用」5 次切换即时同步并补写设备身份块，移除上一版「进调试页才开日志」；480 单测全绿、打包校验通过 |
 | **v0.0.2.20** | beta | Android 9 (API 28) | **调试隐藏时不再主动生成日志文件**：`Log` 新增磁盘日志总开关（默认关闭），`appendFile`/`recordDeviceIdentity` 在关闭时跳过写盘（logcat 不受影响）；仅打开隐藏调试界面后由 UI 置开关为开并补写设备身份块，此后才落盘；单测全绿、打包校验通过 |
 | **v0.0.2.19** | beta | Android 9 (API 28) | **日志补充设备信息与车辆 VIN**：新增 `Log.recordDeviceIdentity` 在日志内追加带分隔线的设备身份块（时间/版本/渠道/机型/Android/设备ID/车架号VIN），启动即落一份、VIN 解析后补写更完整；**上传日志带设备ID**：`log.upload` 请求体新增 `device_id` 与 `vin`，服务端按设备/车辆归类；单测全绿、打包校验通过 |
