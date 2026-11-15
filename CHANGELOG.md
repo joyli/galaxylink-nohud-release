@@ -8,7 +8,12 @@
 > - **本地仓库 `releases/` 目录：只保留最新版本安装包** —— 旧版安装包不在仓库内累积，避免体积膨胀。
 > - 本文件的变更记录永久保留。
 >
-> 当前最新：**v0.0.2.30** → `releases/v0.0.2.30/galaxylink-toolkit-nohud-v0.0.2.30-beta-debug.apk`
+> 当前最新：**v0.0.2.31** → `releases/v0.0.2.31/galaxylink-toolkit-nohud-v0.0.2.31-beta-debug.apk`
+
+## v0.0.2.31 (beta)
+- **门禁拆成服务端两个独立开关**：按最新 APP-API.html，`app_login_required`（是否要账号登录）与 `app_require_invite`（是否要邀请码校验）彼此独立。解锁 = 被打开的校验都通过；「只开邀请码」时只需本机邀请码通过即可用全部功能（当前线上形态 invite=true/login=false），「只开登录」只需登录，两个都关全放开，两个都开才双条件缺一不可
+- **状态页卡片各看各的开关**：登录 / 注册框只看 `app_login_required`、邀请码框只看 `app_require_invite`；邀请码框走 `check-invite` 无需登录即可校验。只开邀请码时状态页只显示邀请码校验框、不显示登录框，未通过校验则只留状态页其余全隐藏；通用页账号区块仍跟随账号登录开关
+- `AccountState` 拆出 `loginRequired` / `inviteRequired` 两状态，`GalaxyLinkManager.parseAccessSwitches` 纯函数解析（缺失默认 true、fail-closed）；`AccessGatePolicy` 重写为双开关判定。单测覆盖四种开关组合与卡片显隐，530 例全绿、打包闸门全通过
 
 ## v0.0.2.30 (beta)
 - **服务端关闭门禁时，通用页账号区块一并隐藏**：`AccountSection`（登录 / 注册、账号资料、邀请码管理）在 `app_login_required=false` 时整体不渲染，与状态页登录 / 邀请码卡片的显隐语义一致；门禁打开时账号入口照常显示
