@@ -8,7 +8,12 @@
 > - **本地仓库 `releases/` 目录：只保留最新版本安装包** —— 旧版安装包不在仓库内累积，避免体积膨胀。
 > - 本文件的变更记录永久保留。
 >
-> 当前最新：**v0.0.2.27** → `releases/v0.0.2.27/galaxylink-toolkit-nohud-v0.0.2.27-beta-debug.apk`
+> 当前最新：**v0.0.2.28** → `releases/v0.0.2.28/galaxylink-toolkit-nohud-v0.0.2.28-beta-debug.apk`
+
+## v0.0.2.28 (beta)
+- **红绿灯提示音支持自定义**：红灯 / 绿灯 / 黄灯三个槽位可分别选择设备上的音频文件（MP3 / WAV / M4A / OGG / AAC / FLAC），**未设置时默认播放内置「噔噔」**。沿用 v0.0.2.15 的触发时机（每轮读秒最后 1 秒响一声），仅按当前灯色选音源，不改变播报频率；中性读秒 / 空闲态回退默认音
+- 音频经系统文件选择器导入 app 私有目录 `filesDir/traffic_light_sounds/`，无需外部存储权限；替换 / 恢复默认时自动清理旧文件。文件名经纯决策层校验为白名单扩展名的纯 basename（防路径穿越），文件缺失或解码失败时播放端自动回退「噔噔」，保证每轮仍有提示
+- 设置入口在「通用 → 悬浮红绿灯倒计时 → 红绿灯语音提示」下方，每个灯色提供「选择 / 试听 / 默认」；新增 `TrafficLightCustomSoundPolicy`（灯色选源、文件名规整、默认文案）、`TrafficLightSoundFiles`（SAF 导入与存取）、`TrafficLightOverlayAppearance` 三字段与 3 个 DataStore key、7 个单测。521 单测全绿、打包校验通过
 
 ## v0.0.2.27 (beta)
 - **恢复并升级为「双门禁」**：解锁条件 = **账号已登录 且 本机邀请码经服务端一机一码校验通过**，两者缺一则侧栏只保留状态页、其余页面隐藏且各 composable 加守卫防返回栈直达。依据 APP-API.html v2.0 §3 / §4.3：用户 Token 可多设备登录，邀请码是设备级凭证（`check-invite` 服务端裁定 + `device/register` 带 `invite_code` 关联 + 本地加密激活态绑定 device_id / VIN），单靠登录不能绕过邀请码
