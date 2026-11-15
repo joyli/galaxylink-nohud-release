@@ -8,7 +8,13 @@
 > - **本地仓库 `releases/` 目录：只保留最新版本安装包** —— 旧版安装包不在仓库内累积，避免体积膨胀。
 > - 本文件的变更记录永久保留。
 >
-> 当前最新：**v0.0.2.24** → `releases/v0.0.2.24/galaxylink-toolkit-nohud-v0.0.2.24-beta-debug.apk`
+> 当前最新：**v0.0.2.25** → `releases/v0.0.2.25/galaxylink-toolkit-nohud-v0.0.2.25-beta-debug.apk`
+
+## v0.0.2.25 (beta)
+- **修复「旧版本升级后没校验邀请码也只显示状态页、其他功能不显示」**：功能可见性与账号/邀请码门禁彻底解耦——侧栏与 NavHost 不再按登录态裁剪路由，全新安装与升级用户都能直接看到并使用全部设置项；登录/注册仅作为状态页顶部的**可选**卡片，不再拦截任何功能
+- **升级老用户自动放行加固**：原判定只看 `lastUpdateTime - firstInstallTime > 5 分钟`，车机恢复出厂 / 清数据 / ROM 重置安装时间戳后会被误判成全新安装。新增「本机旧版本使用痕迹」判据（GalaxyTrack 的 device_id / 注册密钥 / 上报记录 / VIN 缓存，或已拿到的 api_key），命中即放行并补写 `LEGACY_AUTO` 激活态；`InviteGatePolicy.shouldAutoActivateLegacyUser` 增加三参重载与回归单测
+- **完成 APP-API.html v2.0 账号体系接入**：注册（邮箱/密码/邀请码/PNG 图形验证码，按 `user/config` 动态显隐）、邮箱验证、登录（Token 经 Keystore AES-GCM 持久化 + `Bearer`/`X-Access-Token` 鉴权）、退出登录；新增「账号」页（资料展示、密码/用户名/邮箱修改、邀请码申请/生成/绑定/列表）；新增 `AuthPolicy` 纯决策层与 `AccountState` 状态单例，删除废弃的 `InviteGateCard` / `InviteGateState`
+- 线上接口实测：`user/config`（注册开启、需邀请码/验证码/邮箱验证）、`captcha`（PNG data-URI）、`user/register`（字段名与验证码会话校验）均符合文档；508 单测全绿、打包闸门全通过。注：调试页日志上传报 500 属服务端 `upload-log` 处理器异常，App 侧请求格式无误，待后端修复
 
 ## v0.0.2.24 (beta)
 - **调试页「上传日志」按钮按最新 APP-API.html 接入新版日志上传**：`POST /api/device/upload-log`（`multipart/form-data`，字段 `api_key`+`file`+`remark`），替换原 GalaxyTrack GT1 `log.upload` 通道；未选中文件时回退上传最近一份日志
