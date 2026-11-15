@@ -33,7 +33,8 @@
 
 | 版本 | 渠道 | 最低系统 | 说明 |
 | --- | --- | --- | --- |
-| **v0.0.2.25（最新）** | beta | Android 9 (API 28) | **修复「升级后只显示状态页、其他功能不显示」**：功能可见性与账号/邀请码门禁解耦，全新安装与升级用户均可直接使用全部设置项，登录/注册降级为状态页可选卡片；升级老用户放行新增「本机历史使用痕迹」判据，抗车机清数据/时间戳重置。**完成 APP-API.html v2.0 账号体系接入**：注册（邀请码/图形验证码/邮箱验证）、登录（Token 加密持久化 + 鉴权头）、账号页（资料/密码/邮箱修改、邀请码申请与绑定）、退出登录；新增 `AuthPolicy`/`AccountState` 与回归单测。508 单测全绿、打包校验通过 |
+| **v0.0.2.26（最新）** | beta | Android 9 (API 28) | **账号体系 UI 位置调整**：移除 dock 栏「账号」入口；状态页「设备概览」右上角显示「账号未登录 / 账号已登录」，不再弹顶部登录卡片；账号区块移入通用页右列「日志与诊断」下方（新增 `AccountSection`），「资料修改」「邀请码管理」点击展开、默认不展开；登录文案抽为 `AuthPolicy.accountStatusLabel` 纯函数。510 单测全绿、打包校验通过 |
+| v0.0.2.25 | beta | Android 9 (API 28) | **修复「升级后只显示状态页、其他功能不显示」**：功能可见性与账号/邀请码门禁解耦，全新安装与升级用户均可直接使用全部设置项，登录/注册降级为状态页可选卡片；升级老用户放行新增「本机历史使用痕迹」判据，抗车机清数据/时间戳重置。**完成 APP-API.html v2.0 账号体系接入**：注册（邀请码/图形验证码/邮箱验证）、登录（Token 加密持久化 + 鉴权头）、账号页（资料/密码/邮箱修改、邀请码申请与绑定）、退出登录；新增 `AuthPolicy`/`AccountState` 与回归单测。508 单测全绿、打包校验通过 |
 | v0.0.2.24 | beta | Android 9 (API 28) | **调试页「上传日志」按最新 APP-API.html 接入新版日志上传**：`POST /api/device/upload-log`（multipart/form-data，字段 `api_key`+`file`+`remark`），替换原 GT1 `log.upload`；新增 `GalaxyLinkApi.uploadLogFile`（HttpURLConnection 手写 multipart，项目无 OkHttp）+ `GalaxyLinkUploadPolicy` 纯决策层（扩展名/10MB 上限/remark≤255，含单测），`GalaxyLinkManager.uploadLog` 先本地校验（无 api_key/空/超限/类型非法）再上传且 remark 带 `device_id` 便于后台区分。497 单测全绿、打包校验通过 |
 | v0.0.2.23 | beta | Android 9 (API 28) | **修复邀请码「刚生成即提示已被使用或已停用」误读与激活死局**：`check-invite` 实测只读，该文案覆盖未发放/已使用/已停用；校验通过即写本地加密激活态解锁，带码登记降级为尽力而为；491 单测全绿、打包校验通过 |
 | v0.0.2.22 | beta | Android 9 (API 28) | **按 APP-API.html v1.1 重新接入 GalaxyLink 新版官方 REST**：新增 `system/galaxylink` 包（`galaxylink/public`，明文 JSON 统一响应），设备登记/密钥校验/心跳/版本检查全切新接口；**邀请码门禁**：状态页输 8 位码（`check-invite` 校验 + `device/register` 带码关联）→ 本地加密激活态绑定 device_id+VIN，未激活只显状态页且各页加守卫，覆盖安装老用户自动放行；升级检查新增 `galaxylink` 官方源（`/api/version/check`）；旧 GT1 通道保留上传日志/安装上报/推送回执。491 单测全绿、打包校验通过 |
