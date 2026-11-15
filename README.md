@@ -33,7 +33,8 @@
 
 | 版本 | 渠道 | 最低系统 | 说明 |
 | --- | --- | --- | --- |
-| **v0.0.2.29（最新）** | beta | Android 9 (API 28) | **接入服务端门禁总开关**：启动拉取 `user/config` 的 `app_login_required`，`false` 时 App 直接放开全部功能、状态页不再显示登录 / 邀请码卡片；`true` 时继续「账号登录 + 邀请码一机一码」双门禁。字段缺失 / 拉取失败默认启用门禁（fail-closed），绝不误放行；`AccessGatePolicy` 扩展纯函数开关判定。527 单测全绿、打包校验通过 |
+| **v0.0.2.30（最新）** | beta | Android 9 (API 28) | **服务端关闭门禁时通用页账号区块一并隐藏**：`AccountSection`（登录/注册、账号资料、邀请码管理）在 `app_login_required=false` 时整体不渲染，与状态页卡片显隐一致；显隐判定收敛为 `AccessGatePolicy.shouldShowAccountSection` 纯函数。528 单测全绿、打包校验通过 |
+| v0.0.2.29 | beta | Android 9 (API 28) | **接入服务端门禁总开关**：启动拉取 `user/config` 的 `app_login_required`，`false` 时 App 直接放开全部功能、状态页不再显示登录 / 邀请码卡片；`true` 时继续「账号登录 + 邀请码一机一码」双门禁。字段缺失 / 拉取失败默认启用门禁（fail-closed），绝不误放行；`AccessGatePolicy` 扩展纯函数开关判定。527 单测全绿、打包校验通过 |
 | v0.0.2.28 | beta | Android 9 (API 28) | **红绿灯提示音支持自定义**：红灯 / 绿灯 / 黄灯三个槽位可分别选择设备音频（MP3 / WAV / M4A / OGG / AAC / FLAC），**未设置默认「噔噔」**；沿用「读秒最后 1 秒一声」触发时机，仅按灯色选音源。SAF 导入 app 私有目录、无需存储权限，文件名经纯决策层校验防路径穿越，文件缺失 / 损坏自动回退默认音。设置入口在通用页「悬浮红绿灯倒计时」内，每灯可选 / 试听 / 恢复默认。新增 `TrafficLightCustomSoundPolicy` / `TrafficLightSoundFiles` 与 7 个单测。521 单测全绿、打包校验通过 |
 | v0.0.2.27 | beta | Android 9 (API 28) | **恢复并升级为双门禁**：解锁 = 账号已登录 **且** 本机邀请码经服务端一机一码校验通过（Token 可多设备，邀请码是设备级凭证，缺一不可）；未解锁时侧栏只留状态页，其余页隐藏且加守卫。状态页参考 v0.0.2.25 恢复登录框，并新增邀请码校验框；**老用户升级也强制验证**，删除覆盖安装/历史痕迹/旧激活态自动放行，启动只认服务端校验通过且绑定 device_id/VIN 的激活态（`LEGACY_AUTO` 一律清除）。新增 `AccessGatePolicy`/`InviteVerifyCard`、`AccountState.inviteVerified`。514 单测全绿、打包校验通过 |
 | v0.0.2.26 | beta | Android 9 (API 28) | **账号体系 UI 位置调整**：移除 dock 栏「账号」入口；状态页「设备概览」右上角显示「账号未登录 / 账号已登录」，不再弹顶部登录卡片；账号区块移入通用页右列「日志与诊断」下方（新增 `AccountSection`），「资料修改」「邀请码管理」点击展开、默认不展开；登录文案抽为 `AuthPolicy.accountStatusLabel` 纯函数。510 单测全绿、打包校验通过 |

@@ -8,7 +8,11 @@
 > - **本地仓库 `releases/` 目录：只保留最新版本安装包** —— 旧版安装包不在仓库内累积，避免体积膨胀。
 > - 本文件的变更记录永久保留。
 >
-> 当前最新：**v0.0.2.29** → `releases/v0.0.2.29/galaxylink-toolkit-nohud-v0.0.2.29-beta-debug.apk`
+> 当前最新：**v0.0.2.30** → `releases/v0.0.2.30/galaxylink-toolkit-nohud-v0.0.2.30-beta-debug.apk`
+
+## v0.0.2.30 (beta)
+- **服务端关闭门禁时，通用页账号区块一并隐藏**：`AccountSection`（登录 / 注册、账号资料、邀请码管理）在 `app_login_required=false` 时整体不渲染，与状态页登录 / 邀请码卡片的显隐语义一致；门禁打开时账号入口照常显示
+- 显隐判定收敛到 `AccessGatePolicy.shouldShowAccountSection(serverGateEnabled)` 纯函数，新增单测；528 例全绿、打包闸门全通过
 
 ## v0.0.2.29 (beta)
 - **接入服务端门禁总开关**：启动拉取 `GET /api/user/config` 的 `app_login_required`（线上实测已返回，文档 v2.1 字段表尚未列出）。`false` = 服务端关闭门禁，App 直接放开全部功能、状态页不再显示登录 / 邀请码卡片；`true` = 打开门禁，继续执行「账号已登录 + 本机邀请码服务端一机一码校验」双门禁
