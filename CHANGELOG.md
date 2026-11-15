@@ -8,7 +8,13 @@
 > - **本地仓库 `releases/` 目录：只保留最新版本安装包** —— 旧版安装包不在仓库内累积，避免体积膨胀。
 > - 本文件的变更记录永久保留。
 >
-> 当前最新：**v0.0.2.26** → `releases/v0.0.2.26/galaxylink-toolkit-nohud-v0.0.2.26-beta-debug.apk`
+> 当前最新：**v0.0.2.27** → `releases/v0.0.2.27/galaxylink-toolkit-nohud-v0.0.2.27-beta-debug.apk`
+
+## v0.0.2.27 (beta)
+- **恢复并升级为「双门禁」**：解锁条件 = **账号已登录 且 本机邀请码经服务端一机一码校验通过**，两者缺一则侧栏只保留状态页、其余页面隐藏且各 composable 加守卫防返回栈直达。依据 APP-API.html v2.0 §3 / §4.3：用户 Token 可多设备登录，邀请码是设备级凭证（`check-invite` 服务端裁定 + `device/register` 带 `invite_code` 关联 + 本地加密激活态绑定 device_id / VIN），单靠登录不能绕过邀请码
+- **状态页参考 v0.0.2.25 恢复登录框**：未登录显示登录 / 注册框（`AccountGateCard`），邀请码未校验显示新增的邀请码校验框（`InviteVerifyCard`）；两个条件各自独立提示，均满足后卡片消失。设备概览右上角账号登录说明保留
+- **老用户升级也强制验证**：彻底删除 v0.0.2.25 / 26 的「覆盖安装 / 历史使用痕迹 / 旧激活态自动放行」，`AccountState` 不再写 `LEGACY_AUTO` 激活态；启动时只认「服务端校验通过且与本机 device_id / VIN 绑定有效」的激活态，`LEGACY_AUTO` 及格式非法凭证一律清除并要求重新校验
+- `AccountState` 拆出独立的设备级 `inviteVerified` 状态（退出登录只清账号态，不影响本机邀请码激活态）；新增 `AccessGatePolicy` 纯决策层与 4 个单测锁死「双条件、老用户不放行」规则。514 单测全绿、打包闸门全通过
 
 ## v0.0.2.26 (beta)
 - **账号体系 UI 位置调整**：移除 dock 栏「账号」独立页（`AccountPage` / `CabinRoute.Account` / `ic_nav_account` 一并删除），账号不再占用侧栏入口
