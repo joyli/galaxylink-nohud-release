@@ -8,7 +8,12 @@
 > - **本地仓库 `releases/` 目录：只保留最新版本安装包** —— 旧版安装包不在仓库内累积，避免体积膨胀。
 > - 本文件的变更记录永久保留。
 >
-> 当前最新：**v0.0.2.28** → `releases/v0.0.2.28/galaxylink-toolkit-nohud-v0.0.2.28-beta-debug.apk`
+> 当前最新：**v0.0.2.29** → `releases/v0.0.2.29/galaxylink-toolkit-nohud-v0.0.2.29-beta-debug.apk`
+
+## v0.0.2.29 (beta)
+- **接入服务端门禁总开关**：启动拉取 `GET /api/user/config` 的 `app_login_required`（线上实测已返回，文档 v2.1 字段表尚未列出）。`false` = 服务端关闭门禁，App 直接放开全部功能、状态页不再显示登录 / 邀请码卡片；`true` = 打开门禁，继续执行「账号已登录 + 本机邀请码服务端一机一码校验」双门禁
+- **fail-closed 默认**：字段缺失 / 配置拉取失败时默认启用门禁，绝不因网络抖动误放行；`AccessGatePolicy.isUnlocked` 新增 `serverGateEnabled` 参数且保持纯函数——关闭时无条件放行，打开时仍锁死双条件与「老用户不放行」规则
+- `GalaxyLinkManager.UserConfig` 新增 `appLoginRequired` 解析，启动拉到公开配置后写入 `AccountState.serverGateEnabled` StateFlow；`App.kt` 解锁判定与 `StatusPage.kt` 卡片显隐均改读该开关。单测新增 6 例、527 例全绿、打包闸门全通过
 
 ## v0.0.2.28 (beta)
 - **红绿灯提示音支持自定义**：红灯 / 绿灯 / 黄灯三个槽位可分别选择设备上的音频文件（MP3 / WAV / M4A / OGG / AAC / FLAC），**未设置时默认播放内置「噔噔」**。沿用 v0.0.2.15 的触发时机（每轮读秒最后 1 秒响一声），仅按当前灯色选音源，不改变播报频率；中性读秒 / 空闲态回退默认音
