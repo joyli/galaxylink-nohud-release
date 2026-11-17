@@ -8,7 +8,11 @@
 > - **本地仓库 `releases/` 目录：只保留最新版本安装包** —— 旧版安装包不在仓库内累积，避免体积膨胀。
 > - 本文件的变更记录永久保留。
 >
-> 当前最新：**v0.0.2.35** → `releases/v0.0.2.35/galaxylink-toolkit-nohud-v0.0.2.35-beta-debug.apk`
+> 当前最新：**v0.0.2.36** → `releases/v0.0.2.36/galaxylink-toolkit-nohud-v0.0.2.36-beta-debug.apk`
+
+## v0.0.2.36 (beta)
+
+- **修复「路口引导」卡片缩放/宽高自定义不生效**：设置变化监听里判断"是否已有悬浮卡"时只看单灯卡的 `cardBinder`，漏了路口卡独立的 `junctionBinder`，导致改缩放/宽高时误判为无卡、跳过移除重建，尺寸永远不变（其他样式不受影响）。改为统一判定 `hasOverlayCard(cardBinder, junctionBinder)`，路口卡现在也能实时响应尺寸调整。555 单测全绿、打包校验通过。
 
 ## v0.0.2.35 (beta)
 
