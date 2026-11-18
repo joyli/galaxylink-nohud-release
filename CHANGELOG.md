@@ -8,7 +8,11 @@
 > - **本地仓库 `releases/` 目录：只保留最新版本安装包** —— 旧版安装包不在仓库内累积，避免体积膨胀。
 > - 本文件的变更记录永久保留。
 >
-> 当前最新：**v0.0.2.37** → `releases/v0.0.2.37/galaxylink-toolkit-nohud-v0.0.2.37-beta-debug.apk`
+> 当前最新：**v0.0.2.38** → `releases/v0.0.2.38/galaxylink-toolkit-nohud-v0.0.2.38-beta-debug.apk`
+
+## v0.0.2.38 (beta)
+
+- **红绿灯提示音开放内置音效 + 支持 GalaxyLink 文件夹音频**：9 条内置音效（噔噔/请起步/绿灯可过/减速等灯等）全部可在设置页选择试听；也可把音频放入 `/GalaxyLink/Sound/` 自行调用，SAF 导入优先落该目录。三灯槽位统一 `soundRef`（默认/builtin/文件名），旧数据兼容，内置或文件损坏自动回退默认噔噔。565 单测全绿、打包闸门全通过。
 
 ## v0.0.2.37 (beta)
 
