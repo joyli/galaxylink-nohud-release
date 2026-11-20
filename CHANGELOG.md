@@ -8,7 +8,12 @@
 > - **本地仓库 `releases/` 目录：只保留最新版本安装包** —— 旧版安装包不在仓库内累积，避免体积膨胀。
 > - 本文件的变更记录永久保留。
 >
-> 当前最新：**v0.0.2.42** → `releases/v0.0.2.42/galaxylink-toolkit-nohud-v0.0.2.42-beta-debug.apk`
+> 当前最新：**v0.0.2.43** → `releases/v0.0.2.43/galaxylink-toolkit-nohud-v0.0.2.43-beta-debug.apk`
+
+## v0.0.2.43 (beta)
+
+- **调试页新增「摄像头采集地基探测」**：只读检查 root / 板卡平台 / Android 版本 / 厂商采集程序 `/system/bin/qcarcam_hidl_test` / RAW 帧目录 `/data/vendor/camera` 五项，逐项展示通过/失败与结论，不写入、不采集、不干扰原车 360。
+- 判定抽成纯决策层 `CameraProbePolicy`（root/厂商程序为 Hard 一票否决，其余为 Info 参考），fail-closed：缺 Hard 项或空结果一律判「地基不具备」。新增 9 项单测，587 单测全绿、打包校验通过。
 
 ## v0.0.2.42 (beta)
 
