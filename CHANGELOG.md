@@ -8,7 +8,12 @@
 > - **本地仓库 `releases/` 目录：只保留最新版本安装包** —— 旧版安装包不在仓库内累积，避免体积膨胀。
 > - 本文件的变更记录永久保留。
 >
-> 当前最新：**v0.0.2.48** → `releases/v0.0.2.48/galaxylink-toolkit-nohud-v0.0.2.48-beta-debug.apk`
+> 当前最新：**v0.0.2.50** → `releases/v0.0.2.50/galaxylink-toolkit-nohud-v0.0.2.50-beta-debug.apk`
+
+## v0.0.2.50 (beta)
+
+- **悬浮红绿灯三个灯组整体右移 10dp**：纯视觉平移，不改布局占位，速度表与车道条位置不变。
+- 586 单测全绿、打包校验通过（APK 6.04MB）。
 
 ## v0.0.2.48 (beta)
 
