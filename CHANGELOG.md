@@ -8,7 +8,12 @@
 > - **本地仓库 `releases/` 目录：只保留最新版本安装包** —— 旧版安装包不在仓库内累积，避免体积膨胀。
 > - 本文件的变更记录永久保留。
 >
-> 当前最新：**v0.0.2.44** → `releases/v0.0.2.44/galaxylink-toolkit-nohud-v0.0.2.44-beta-debug.apk`
+> 当前最新：**v0.0.2.45** → `releases/v0.0.2.45/galaxylink-toolkit-nohud-v0.0.2.45-beta-debug.apk`
+
+## v0.0.2.45 (beta)
+
+- **移除「摄像头采集地基探测」**（按用户要求撤销 v0.0.2.43 功能）：删除调试页日志区的探测按钮、结果对话框与相关状态，删除 `CameraProbePolicy` / `CameraGroundProbe` / `CameraProbePolicyTest` 三个专属文件。其余调试、日志、四路全景与雷达联动能力不变。
+- 移除 9 项探测单测，579 单测全绿、打包校验通过。
 
 ## v0.0.2.44 (beta)
 
