@@ -8,7 +8,12 @@
 > - **本地仓库 `releases/` 目录：只保留最新版本安装包** —— 旧版安装包不在仓库内累积，避免体积膨胀。
 > - 本文件的变更记录永久保留。
 >
-> 当前最新：**v0.0.2.72** → `releases/v0.0.2.72/galaxylink-toolkit-nohud-v0.0.2.72-beta-debug.apk`
+> 当前最新：**v0.0.2.73** → `releases/v0.0.2.73/galaxylink-toolkit-nohud-v0.0.2.73-beta-debug.apk`
+
+## v0.0.2.73 (beta)
+
+- **修复云设置「拉取/保存失败：网络异常」的真实根因**：用户日志证实是 `android.os.NetworkOnMainThreadException`——Compose `rememberCoroutineScope()` 默认 Main 调度，网络请求在 `launch` 块内直接发出被 StrictMode 拦截（message 为空，故旧版显示笼统「网络异常」）。拉取/保存已改在 `withContext(Dispatchers.IO)` 执行，UI 状态更新仍回主线程。账号区、配置上传、日志上传原本已正确切 IO。
+- 627 单测全绿（debug/release 双套 0 失败）、打包校验闸门通过。
 
 ## v0.0.2.72 (beta)
 
