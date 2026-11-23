@@ -8,7 +8,17 @@
 > - **本地仓库 `releases/` 目录：只保留最新版本安装包** —— 旧版安装包不在仓库内累积，避免体积膨胀。
 > - 本文件的变更记录永久保留。
 >
-> 当前最新：**v0.0.2.71** → `releases/v0.0.2.71/galaxylink-toolkit-nohud-v0.0.2.71-beta-debug.apk`
+> 当前最新：**v0.0.2.72** → `releases/v0.0.2.72/galaxylink-toolkit-nohud-v0.0.2.72-beta-debug.apk`
+
+## v0.0.2.72 (beta)
+
+- **云端设置失败提示暴露真实根因**：拉取/保存失败写 logcat 完整异常栈，界面显示真实异常类型 + 业务 code/http code + message（如 `SocketTimeoutException: failed to connect to car.izhuoe.com`、`GalaxyLinkException(code=401, http=401): 登录状态已失效`），不再被笼统的「网络异常」掩盖。
+- **401 自动引导重新登录**：云设置拉取/保存遇到鉴权失效时自动清除失效登录态，账号区出现登录入口并提示重新登录，避免反复点击无效拉取。
+- 627 单测全绿（debug/release 双套 0 失败）、打包校验闸门通过。
+
+## v0.0.2.71 (beta)
+
+- 注册用户验证邮箱后自动下发邀请码并绑定本机：`verifyEmail` 解析服务端 `data.invite_code`，验证成功→自动登录→用下发的码 `check-invite`+`device/register` 绑定本机写激活态；下发码绑定失败兜底申请账号设备码。
 
 ## v0.0.2.70 (beta)
 
