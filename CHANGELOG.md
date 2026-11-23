@@ -8,7 +8,12 @@
 > - **本地仓库 `releases/` 目录：只保留最新版本安装包** —— 旧版安装包不在仓库内累积，避免体积膨胀。
 > - 本文件的变更记录永久保留。
 >
-> 当前最新：**v0.0.2.73** → `releases/v0.0.2.73/galaxylink-toolkit-nohud-v0.0.2.73-beta-debug.apk`
+> 当前最新：**v0.0.2.74** → `releases/v0.0.2.74/galaxylink-toolkit-nohud-v0.0.2.74-beta-debug.apk`
+
+## v0.0.2.74 (beta)
+
+- 修复账号页「绑定邀请码到本设备」失败：原实现调用服务端未文档化接口 `/api/user/invite/bind`（不在 APP-API 接口清单内），服务端对该接口参数校验返回含糊文案「请选择要关联的邀请码」，用户填入有效专属码也无法绑定。现改走已验证的一机一码标准链路 `activate()`（`check-invite` 校验 → `device/register` 带码绑定 → 写本地激活态），并回显真实成功/失败原因，增加输入说明。
+- 627 单测全绿（debug/release 双套 0 失败）、编译通过、打包校验闸门通过。
 
 ## v0.0.2.73 (beta)
 

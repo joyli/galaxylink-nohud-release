@@ -33,7 +33,8 @@
 
 | 版本 | 渠道 | 最低系统 | 说明 |
 | --- | --- | --- | --- |
-| **v0.0.2.73（最新）** | beta | Android 9 (API 28) | **修复云设置「网络异常」根因**：实测为用户主线程发网络请求触发 `NetworkOnMainThreadException`，拉取/保存已切到 IO 线程执行、UI 回主线程更新；账号区/配置上传/日志上传原本已正确切 IO。627 单测全绿、打包校验通过 |
+| **v0.0.2.74（最新）** | beta | Android 9 (API 28) | **修复账号页绑定邀请码失败**：弃用服务端未文档化的 `/api/user/invite/bind`（报「请选择要关联的邀请码」），改走已验证的一机一码链路 `check-invite` → `device/register` → 写激活态，真实结果回显。627 单测全绿、打包校验通过 |
+| v0.0.2.73 | beta | Android 9 (API 28) | **修复云设置「网络异常」根因**：实测为用户主线程发网络请求触发 `NetworkOnMainThreadException`，拉取/保存已切到 IO 线程执行、UI 回主线程更新；账号区/配置上传/日志上传原本已正确切 IO。627 单测全绿、打包校验通过 |
 | v0.0.2.72 | beta | Android 9 (API 28) | **云设置失败提示暴露真实根因 + 401 自动引导重登**：拉取/保存失败写 logcat 完整异常栈，界面显示异常类型 + code/http + 真实 message（如 `SocketTimeoutException`、`GalaxyLinkException(code=401)`），不再糊成「网络异常」；401 自动清失效登录态并引导到账号区重新登录。627 单测全绿、打包校验通过 |
 | v0.0.2.71 | beta | Android 9 (API 28) | **注册验证邮箱后自动下发邀请码绑定本机**：`verifyEmail` 解析服务端 `data.invite_code`，验证成功→自动登录→用下发的码 `check-invite`+`device/register` 绑定本机写激活态，实现一键激活；下发码绑定失败兜底申请账号设备码。 |
 | v0.0.2.70 | beta | Android 9 (API 28) | **解开门禁 + 云端写门槛 + 适配服务端 v2.4.0**：本地功能对游客全放开；配置上传收紧为「已登录+已激活」，log 上传绑定用户 uid；识别 code=1 一机一码新语义、支持登录后申请设备码激活；通用页新增「云设置」面板（设备列表/在线编辑/密码提交下发到账号所有设备）。文档 SETTINGS-SYNC-API v3.1 |
