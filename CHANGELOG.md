@@ -8,7 +8,12 @@
 > - **本地仓库 `releases/` 目录：只保留最新版本安装包** —— 旧版安装包不在仓库内累积，避免体积膨胀。
 > - 本文件的变更记录永久保留。
 >
-> 当前最新：**v0.0.2.75** → `releases/v0.0.2.75/galaxylink-toolkit-nohud-v0.0.2.75-beta-debug.apk`
+> 当前最新：**v0.0.2.76** → `releases/v0.0.2.76/galaxylink-toolkit-nohud-v0.0.2.76-beta-debug.apk`
+
+## v0.0.2.76 (beta)
+
+- 云端设置从通用页移至状态页：通用页移除「云端设置」面板；状态页把「配置文件」（含配置同步）与「云端设置」左右并排、等宽等高对齐（双列 EqualHeightRow，窄屏单列上下堆叠）。
+- 627 单测全绿（debug/release 双套 0 失败）、编译通过、打包校验闸门通过。
 
 ## v0.0.2.75 (beta)
 
