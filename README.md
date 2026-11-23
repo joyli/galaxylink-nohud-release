@@ -33,7 +33,8 @@
 
 | 版本 | 渠道 | 最低系统 | 说明 |
 | --- | --- | --- | --- |
-| **v0.0.2.74（最新）** | beta | Android 9 (API 28) | **修复账号页绑定邀请码失败**：弃用服务端未文档化的 `/api/user/invite/bind`（报「请选择要关联的邀请码」），改走已验证的一机一码链路 `check-invite` → `device/register` → 写激活态，真实结果回显。627 单测全绿、打包校验通过 |
+| **v0.0.2.75（最新）** | beta | Android 9 (API 28) | 账号页改版：移除「资料修改」「邀请码管理」，保留「绑定邀请码到本设备」直接展示；标题右侧新增「修改资料」按钮，浏览器打开服务端用户端登录页 `car.izhuoe.com/front/`。627 单测全绿、打包校验通过 |
+| v0.0.2.74 | beta | Android 9 (API 28) | **修复账号页绑定邀请码失败**：弃用服务端未文档化的 `/api/user/invite/bind`（报「请选择要关联的邀请码」），改走已验证的一机一码链路 `check-invite` → `device/register` → 写激活态，真实结果回显。627 单测全绿、打包校验通过 |
 | v0.0.2.73 | beta | Android 9 (API 28) | **修复云设置「网络异常」根因**：实测为用户主线程发网络请求触发 `NetworkOnMainThreadException`，拉取/保存已切到 IO 线程执行、UI 回主线程更新；账号区/配置上传/日志上传原本已正确切 IO。627 单测全绿、打包校验通过 |
 | v0.0.2.72 | beta | Android 9 (API 28) | **云设置失败提示暴露真实根因 + 401 自动引导重登**：拉取/保存失败写 logcat 完整异常栈，界面显示异常类型 + code/http + 真实 message（如 `SocketTimeoutException`、`GalaxyLinkException(code=401)`），不再糊成「网络异常」；401 自动清失效登录态并引导到账号区重新登录。627 单测全绿、打包校验通过 |
 | v0.0.2.71 | beta | Android 9 (API 28) | **注册验证邮箱后自动下发邀请码绑定本机**：`verifyEmail` 解析服务端 `data.invite_code`，验证成功→自动登录→用下发的码 `check-invite`+`device/register` 绑定本机写激活态，实现一键激活；下发码绑定失败兜底申请账号设备码。 |

@@ -8,7 +8,13 @@
 > - **本地仓库 `releases/` 目录：只保留最新版本安装包** —— 旧版安装包不在仓库内累积，避免体积膨胀。
 > - 本文件的变更记录永久保留。
 >
-> 当前最新：**v0.0.2.74** → `releases/v0.0.2.74/galaxylink-toolkit-nohud-v0.0.2.74-beta-debug.apk`
+> 当前最新：**v0.0.2.75** → `releases/v0.0.2.75/galaxylink-toolkit-nohud-v0.0.2.75-beta-debug.apk`
+
+## v0.0.2.75 (beta)
+
+- 账号页改版：移除「资料修改」「邀请码管理」（申请/生成/邀请码列表）两块面板，保留「绑定邀请码到本设备」并直接展示；「账号」标题右侧新增「修改资料」按钮，点击以浏览器打开服务端用户端登录页 `https://car.izhuoe.com/front/`（新增 `WebLoginUrl` 常量，带 `NEW_TASK`，兼容无浏览器场景）。
+- `SectionHeader` 新增可选 `actions` 插槽（默认空、向后兼容）；`ExpandableRow` 保留供其它页复用。
+- 627 单测全绿（debug/release 双套 0 失败）、编译通过、打包校验闸门通过。
 
 ## v0.0.2.74 (beta)
 
