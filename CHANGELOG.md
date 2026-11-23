@@ -8,7 +8,11 @@
 > - **本地仓库 `releases/` 目录：只保留最新版本安装包** —— 旧版安装包不在仓库内累积，避免体积膨胀。
 > - 本文件的变更记录永久保留。
 >
-> 当前最新：**v0.0.2.77** → `releases/v0.0.2.77/galaxylink-toolkit-nohud-v0.0.2.77-beta-debug.apk`
+> 当前最新：**v0.0.2.78** → `releases/v0.0.2.78/galaxylink-toolkit-nohud-v0.0.2.78-beta-debug.apk`
+
+## v0.0.2.78 (beta)
+
+- **修复配置同步状态文字不显示**：状态区固定预留两行高度，解决 EqualHeightRow 等高布局下状态文字被卡片底边裁切的问题；成功反馈改用醒目绿色。627 单测全绿、编译与打包闸门通过。
 
 ## v0.0.2.77 (beta)
 
