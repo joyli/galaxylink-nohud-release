@@ -8,7 +8,7 @@
 > - **本地仓库 `releases/` 目录：只保留最新版本安装包** —— 旧版安装包不在仓库内累积，避免体积膨胀。
 > - 本文件的变更记录永久保留。
 >
-> 当前最新：**v0.0.2.70** → `releases/v0.0.2.70/galaxylink-toolkit-nohud-v0.0.2.70-beta-debug.apk`
+> 当前最新：**v0.0.2.71** → `releases/v0.0.2.71/galaxylink-toolkit-nohud-v0.0.2.71-beta-debug.apk`
 
 ## v0.0.2.70 (beta)
 
