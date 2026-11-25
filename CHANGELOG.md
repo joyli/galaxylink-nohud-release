@@ -8,7 +8,12 @@
 > - **本地仓库 `releases/` 目录：只保留最新版本安装包** —— 旧版安装包不在仓库内累积，避免体积膨胀。
 > - 本文件的变更记录永久保留。
 >
-> 当前最新：**v0.0.2.78** → `releases/v0.0.2.78/galaxylink-toolkit-nohud-v0.0.2.78-beta-debug.apk`
+> 当前最新：**v0.0.2.79** → `releases/v0.0.2.79/galaxylink-toolkit-nohud-v0.0.2.79-beta-debug.apk`
+
+## v0.0.2.79 (beta)
+
+- **账号页邀请码展示与绑定框收敛**：「专属邀请码」改为「绑定该设备的邀请码」，值取本机加密激活态中的设备级码；本机已激活后隐藏「绑定邀请码到本设备」输入框与按钮，避免重复绑定。
+- 绑定动作改走 `AccountState.verifyInvite`，成功后即时置 `inviteVerified=true`，绑定框自动隐藏、设备码自动刷新。627 单测全绿、编译与打包闸门通过。
 
 ## v0.0.2.78 (beta)
 
