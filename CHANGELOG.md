@@ -8,7 +8,12 @@
 > - **本地仓库 `releases/` 目录：只保留最新版本安装包** —— 旧版安装包不在仓库内累积，避免体积膨胀。
 > - 本文件的变更记录永久保留。
 >
-> 当前最新：**v0.0.2.80** → `releases/v0.0.2.80/galaxylink-toolkit-nohud-v0.0.2.80-beta-debug.apk`
+> 当前最新：**v0.0.2.81** → `releases/v0.0.2.81/galaxylink-toolkit-nohud-v0.0.2.81-beta-debug.apk`
+
+## v0.0.2.81 (beta)
+
+- **设备 ID 全链路统一**：状态页展示的 `android-{ANDROID_ID}` 与服务端登记/一机一码/心跳/日志上报的随机 UUID 此前是两套 ID；现统一为同一稳定 ID（ANDROID_ID）。
+- **幂等迁移保活**：启动早期把 GT1 device_id 与本地激活态旧 UUID 同步为统一 ID，避免升级后已激活设备掉线；新装直接播种。新增 3 个判定单测，630 单测全绿、编译与打包闸门通过。
 
 ## v0.0.2.80 (beta)
 
