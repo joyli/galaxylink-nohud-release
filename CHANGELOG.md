@@ -8,7 +8,11 @@
 > - **本地仓库 `releases/` 目录：只保留最新版本安装包** —— 旧版安装包不在仓库内累积，避免体积膨胀。
 > - 本文件的变更记录永久保留。
 >
-> 当前最新：**v0.0.2.83** → `releases/v0.0.2.83/galaxylink-toolkit-nohud-v0.0.2.83-beta-debug.apk`
+> 当前最新：**v0.0.2.84** → `releases/v0.0.2.84/galaxylink-toolkit-nohud-v0.0.2.84-beta-debug.apk`
+
+## v0.0.2.84 (beta)
+
+- **修复壁纸探针判据失效**：`csd_wall_type`/`psd_wall_type` 只能读壁纸类型（恒为 1=静态）、读不到具体图片，旧判据永远 FAIL。改用像素采样自动判据：读回壁纸 drawable 缩略采样成颜色特征，与内置测试图比对，自动判定是否真的换图，不靠肉眼。新增 10 个单测。646 单测全绿、编译与打包闸门通过。
 
 ## v0.0.2.83 (beta)
 
