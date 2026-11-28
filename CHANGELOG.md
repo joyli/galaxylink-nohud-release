@@ -8,7 +8,14 @@
 > - **本地仓库 `releases/` 目录：只保留最新版本安装包** —— 旧版安装包不在仓库内累积，避免体积膨胀。
 > - 本文件的变更记录永久保留。
 >
-> 当前最新：**v0.0.2.84** → `releases/v0.0.2.84/galaxylink-toolkit-nohud-v0.0.2.84-beta-debug.apk`
+> 当前最新：**v0.0.2.85** → `releases/v0.0.2.85/galaxylink-toolkit-nohud-v0.0.2.85-beta-debug.apk`
+
+## v0.0.2.85 (beta)
+
+- **车机壁纸注入切换为逆向实证的真路径**：此前走标准 `setBitmap`，车机 Launcher 用 `GeelyWallpaperService` 动态壁纸不读系统静态壁纸，导致「云端存了但车机换不了」。
+- 逆向 `com.geely.theme` 落地真正入口：`IServiceManager.getService(18)` → `IThemeService.transact(10)` 调 `dressStaticWallpaper(2)` 双屏；调用前把图片写到 4 个 OneOS 约定路径 `/sdcard/XUI/static_wallpaper/app_saved_*`（亮/暗 × CSD/PSD）。Binder 协议与路径常量均由 dex 逐指令反编译确认。
+- **双端兼容**：车机走真路径，手机端无 OneOS 服务或注入失败时自动降级标准 `setBitmap`。调试页探针新增 `GeelyThemeDress` 真路径验证，供车机真机一键确认。
+- 新增 7 个纯逻辑单测，共 653 单测全绿、编译通过、打包校验闸门通过。
 
 ## v0.0.2.84 (beta)
 
